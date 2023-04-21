@@ -12,9 +12,9 @@ bot: Bot = Bot(env('BOT_TOKEN'))
 dp: Dispatcher = Dispatcher()
 
 
-@dp.message()
+@dp.message()       # for all other messages
 async def send_echo(message: Message):
-    await message.reply(text=r"Я ещё маленький бот, но скоро вырасту и научусь вам помогать. А пока предлагаю вам сайт Пешеход Тура: https://peshehodtour.ru")
+    await message.reply(text=r"Для справки введите или нажмите /help")
 
 
 if __name__ == '__main__':
