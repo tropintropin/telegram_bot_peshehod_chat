@@ -8,7 +8,7 @@ from environs import Env
 env: Env = Env()
 env.read_env('.env')
 
-bot: Bot = Bot(env('BOT_TOKEN'))
+bot: Bot = Bot(env('BOT_TOKEN'))  # NB! This is token for the test bot!
 dp: Dispatcher = Dispatcher()
 
 
