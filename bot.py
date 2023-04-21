@@ -14,7 +14,7 @@ dp: Dispatcher = Dispatcher()
 
 @dp.message()
 async def send_echo(message: Message):
-    await message.reply(text=r"Я ещё маленький бот, но скоро вырасту и научусь вам помогать. А пока предлагаю вам пройти сайт Пешеход Тура: https://peshehodtour.ru")
+    await message.reply(text=r"Я ещё маленький бот, но скоро вырасту и научусь вам помогать. А пока предлагаю вам сайт Пешеход Тура: https://peshehodtour.ru")
 
 
 if __name__ == '__main__':
