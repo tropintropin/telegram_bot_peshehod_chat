@@ -19,5 +19,3 @@ greeting = r'''Добрый день, Пешеход!
 * [peshehodtour.ru](https://peshehodtour.ru)
 
 **А чтобы начать пользоваться ботом, нажимай на:** /start'''
-
-print(greeting)
