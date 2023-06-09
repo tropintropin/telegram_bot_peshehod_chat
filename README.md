@@ -1,5 +1,7 @@
 # Бот-помощник в Telegram для компании «Пешеход Тур»
 
+[![wakatime](https://wakatime.com/badge/user/45d08a79-2677-4493-83b7-77be5bfef3a9/project/ccdafcd8-cf92-4424-8520-52f183f73fc0.svg)](https://wakatime.com/badge/user/45d08a79-2677-4493-83b7-77be5bfef3a9/project/ccdafcd8-cf92-4424-8520-52f183f73fc0)
+
 ©2023 [Пешеход Тур](https://peshehodtour.ru)
 
 Разработчик: Валерий Тропин, [tropin.one](https://tropin.one)
