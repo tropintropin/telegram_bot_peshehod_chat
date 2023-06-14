@@ -4,19 +4,27 @@ from aiogram.filters import Text, Command
 
 from environs import Env
 
-from lexicon.greeting import greeting
+from lexicon.greeting import greeting, instruction
+
+from time import sleep
 
 
 env: Env = Env()
 env.read_env('.env')
 
-bot: Bot = Bot(token=env('BOT_TOKEN'), parse_mode='HTML')  # NB! This is token for the test bot!
+bot: Bot = Bot(token=env('BOT_TOKEN'))  # NB! Change token for the prod bot!
 dp: Dispatcher = Dispatcher()
 
 
 @dp.message(Command(commands=['start']))
 async def process_start_command(message: Message):
-    await message.answer(greeting)
+    # TODO: Добавить задержку между сообщениями
+    await message.answer(f'{greeting}')
+    sleep(2)
+    await message.answer(f'{instruction}')
+    sleep(2)
+    await message.answer('Наш бот находится в разработке, скоро здесь появится новый функционал 🤗')
+
 
 
 @dp.message()       # for all other messages
