@@ -20,11 +20,6 @@ dp: Dispatcher = Dispatcher()
 async def process_start_command(message: Message):
     # TODO: Добавить задержку между сообщениями
     await message.answer(f'{greeting}')
-    sleep(2)
-    await message.answer(f'{instruction}')
-    sleep(2)
-    await message.answer('<pre><code>Наш бот находится в разработке, скоро здесь появится новый функционал 🤗</code></pre>')
-
 
 
 @dp.message()       # for all other messages
