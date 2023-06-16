@@ -1,6 +1,6 @@
 # Бот-помощник в Telegram для компании «Пешеход Тур»
 
-[![wakatime](https://wakatime.com/badge/user/45d08a79-2677-4493-83b7-77be5bfef3a9/project/ccdafcd8-cf92-4424-8520-52f183f73fc0.svg)](https://wakatime.com/badge/user/45d08a79-2677-4493-83b7-77be5bfef3a9/project/ccdafcd8-cf92-4424-8520-52f183f73fc0)
+[![wakatime](https://wakatime.com/badge/github/tropintropin/telegram_bot_peshehod_chat.svg)](https://wakatime.com/badge/github/tropintropin/telegram_bot_peshehod_chat)
 
 ©2023 [Пешеход Тур](https://peshehodtour.ru)
 
@@ -21,7 +21,7 @@
 
 ## План по запуску разделов бота
 
-- [ ] Вводное слово
+- [x] Вводное слово 2023.06.14
 - [ ] ЧАВо
 - [ ] Контакты
 - [ ] Оставить отзыв
