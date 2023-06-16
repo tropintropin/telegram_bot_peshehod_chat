@@ -4,7 +4,7 @@ from aiogram.filters import Text, Command
 
 from environs import Env
 
-from lexicon.greeting import greeting, instruction
+from lexicon.greeting import greeting
 
 from time import sleep
 
