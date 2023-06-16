@@ -12,7 +12,7 @@ from time import sleep
 env: Env = Env()
 env.read_env('.env')
 
-bot: Bot = Bot(token=env('BOT_TOKEN'))  # NB! Change token for the prod bot!
+bot: Bot = Bot(token=env('BOT_TOKEN'), parse_mode='HTML')  # NB! Change token for the prod bot!
 dp: Dispatcher = Dispatcher()
 
 
@@ -23,7 +23,7 @@ async def process_start_command(message: Message):
     sleep(2)
     await message.answer(f'{instruction}')
     sleep(2)
-    await message.answer('Наш бот находится в разработке, скоро здесь появится новый функционал 🤗')
+    await message.answer('<pre><code>Наш бот находится в разработке, скоро здесь появится новый функционал 🤗</code></pre>')
 
 
 
