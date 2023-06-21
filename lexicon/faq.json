@@ -23,10 +23,7 @@
         },
         {
             "section": "Ваши экскурсии",
-            "items": [
-                "",
-                ""
-            ]
+            "items": "tours_list.json"
         }
     ]
 }
