@@ -1,16 +1,8 @@
 import asyncio
 
 from aiogram import Bot, Dispatcher
-from aiogram.types import Message
-from aiogram.filters import Text, Command
-
-from environs import Env
 
 from config_data.config import Config, load_config
-
-from lexicon.greeting import greeting, instruction
-
-from time import sleep
 
 
 async def main() -> None:
