@@ -16,7 +16,7 @@ async def main() -> None:
     dp.include_router(user_handlers.router)
     dp.include_router(other_handlers.router)
 
-    dp.startup.register(set_main_menu)
+    await set_main_menu(bot)
 
     await bot.delete_webhook(drop_pending_updates=True)
     await dp.start_polling(bot)
