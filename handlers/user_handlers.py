@@ -1,5 +1,6 @@
-from aiogram.types import Message
+from aiogram import Router
 from aiogram.filters import Command, CommandStart
+from aiogram.types import Message
 
 from lexicon.greeting import greeting, instruction
 from lexicon.lexicon import LEXICON_RU
@@ -7,7 +8,10 @@ from lexicon.lexicon import LEXICON_RU
 from time import sleep
 
 
-@dp.message(CommandStart())
+router: Router = Router()
+
+
+@router.message(CommandStart())
 async def process_start_command(message: Message):
     await message.answer(f'{greeting}')
     sleep(2)
@@ -16,7 +20,7 @@ async def process_start_command(message: Message):
     await message.answer('<pre><code>Наш бот находится в разработке, скоро здесь появится новый функционал 🤗</code></pre>')
 
 
-@dp.message(Command(commands='help'))
+@router.message(Command(commands='help'))
 async def process_help_command(message: Message):
     await message.answer(text=LEXICON_RU['/help'])
 
