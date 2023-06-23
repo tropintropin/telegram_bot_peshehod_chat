@@ -13,5 +13,5 @@ with open('../lexicon/tours_list.json', 'r', encoding='utf-8') as tours_list:
 
 
 # print(sections['Оплата и бронирование'].keys())
-# print(tours)
+# print(tours.keys())
 
