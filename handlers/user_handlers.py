@@ -2,6 +2,7 @@ from aiogram.types import Message
 from aiogram.filters import Command, CommandStart
 
 from lexicon.greeting import greeting, instruction
+from lexicon.lexicon import LEXICON_RU
 
 from time import sleep
 
@@ -17,6 +18,5 @@ async def process_start_command(message: Message):
 
 @dp.message(Command(commands='help'))
 async def process_help_command(message: Message):
-    await message.answer(text='''
-Для справки введите или нажмите /help
-Нажмите /start, чтобы вернуться в начало''')
+    await message.answer(text=LEXICON_RU['/help'])
+
