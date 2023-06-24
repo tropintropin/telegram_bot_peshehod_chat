@@ -4,6 +4,8 @@ from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import Message
 
+from keyboards
+
 import json
 
 
@@ -21,11 +23,11 @@ with open('lexicon/tours_list.json', 'r', encoding='utf-8') as tours_list:
 @router.message(Command(commands='tours'))
 async def process_tours_command(message: Message):
     # TODO: Create keyboard from list
-    await message.answer(text='\n\n'.join(tours.keys()))
+    # await message.answer(text='\n\n'.join(tours.keys()))
 
 
 @router.message(Command(commands='faq'))
 async def process_faq_command(message: Message):
     # TODO: Create keyboard from list
-    await message.answer(text='\n\n'.join(sections.keys()))
+    # await message.answer(text='\n\n'.join(sections.keys()))
 
