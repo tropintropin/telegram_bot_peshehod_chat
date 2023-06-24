@@ -1,7 +1,7 @@
 '''Here are the handlers for the FAQ Section.
 '''
 from aiogram import Router
-from aiogram.filters import Command, CommandStart
+from aiogram.filters import Command
 from aiogram.types import Message
 
 import json
