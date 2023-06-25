@@ -7,7 +7,8 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 # Добавляем массивы нужной конфигурации с кнопками в основной массив клавиатуры
 
 
-def create_inline_kb(width: int,
+def create_tours_inline_kb(width: int,
+                    user_dict,
                      *args: str,
                      **kwargs: str) -> InlineKeyboardMarkup:
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
@@ -16,8 +17,8 @@ def create_inline_kb(width: int,
     if args:
         for button in args:
             buttons.append(InlineKeyboardButton(
-                text=button,
-                callback_data=1  # TODO: Write short callback data in jsons
+                text=str(user_dict[button]['Название']),
+                callback_data=button  # TODO: Write short callback data in jsons
             ))
     if kwargs:
         for button, text in kwargs.items():
