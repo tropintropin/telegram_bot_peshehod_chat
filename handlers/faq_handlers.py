@@ -4,7 +4,7 @@ from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import Message
 
-from keyboards.list_keyboard import create_tours_list_inline_kb
+from keyboards.array_keyboards import create_tours_list_inline_kb
 from services.services import get_faq_sections, get_tours_list
 
 
