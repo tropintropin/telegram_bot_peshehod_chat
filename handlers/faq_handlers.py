@@ -32,3 +32,7 @@ async def process_faq_command(message: Message):
     # TODO: Create keyboard from list
     await message.answer(text='\n\n'.join(sections.keys()))
 
+
+# В расписание всех групповых туров надо добавить фразу
+# "в графике возможны изменения, актуальное расписание на сайте",
+# ну или что-то такое
