@@ -4,8 +4,8 @@ from aiogram import Router
 from aiogram.filters import Command
 from aiogram.types import Message
 
-from keyboards.array_keyboards import create_tours_list_inline_kb
-from services.services import get_faq_sections, get_tours_list
+from keyboards.array_keyboards import create_tours_list_inline_kb, create_tour_specs_inline_kb
+from services.services import get_faq_sections, get_tour_specs, get_tours_list
 
 
 router: Router = Router()
@@ -27,3 +27,4 @@ async def process_faq_command(message: Message):
 # В расписание всех групповых туров надо добавить фразу
 # "в графике возможны изменения, актуальное расписание на сайте",
 # ну или что-то такое
+
