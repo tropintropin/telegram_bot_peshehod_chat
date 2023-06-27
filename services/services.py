@@ -31,7 +31,7 @@ def get_private_tours_list():
     return private_tours
 
 
-def get_tour_specs(callback: str) -> dict:
+def get_tour_specs(callback: str | CallbackQuery) -> dict:
     tour_specs: dict = get_tours_list()[callback]
     return tour_specs
 
