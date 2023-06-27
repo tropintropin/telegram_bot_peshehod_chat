@@ -30,7 +30,7 @@ def create_tours_list_inline_kb(width: int, user_dict: dict[str, dict[str, str]]
 
     button_tours = InlineKeyboardButton(
         text='К списку всех туров',
-        callback_data='/tours'
+        callback_data='tours'
     )
 
     kb_builder.row(*buttons, width=width)
@@ -38,12 +38,14 @@ def create_tours_list_inline_kb(width: int, user_dict: dict[str, dict[str, str]]
 
     return kb_builder.as_markup()
 
+
+# TODO: Do working keyboard!
 def create_tour_specs_inline_kb(width: int, user_dict: dict[str, str | dict]) -> InlineKeyboardMarkup:
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = []
 
     for name, description in user_dict.items():
-        if name not in ('is_group_tour', 'Название', 'О чём экскурсия?'):
+        if not name in ['is_group_tour', 'Название', 'О чём экскурсия?']:
             buttons.append(InlineKeyboardButton(
                 text=name,
                 callback_data='CALLBACK'  # TODO: Change callback to description's value
