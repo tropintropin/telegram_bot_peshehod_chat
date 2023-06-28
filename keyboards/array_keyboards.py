@@ -1,13 +1,10 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
+from config_data.config import TourSpecItemCallbackFactory
 from lexicon.lexicon import LEXICON_RU
 from services.services import cut_tour_specs_for_keyboard
 
-
-# Создаем объекты кнопок клавиатуры
-# Создаем объект клавиатуры
-# Добавляем массивы нужной конфигурации с кнопками в основной массив клавиатуры
 
 def create_tours_inline_kb() -> InlineKeyboardMarkup:
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
@@ -49,7 +46,7 @@ def create_tour_specs_inline_kb(width: int, user_dict: dict[str, str | dict]) ->
     for name, description in specs.items():
         buttons.append(InlineKeyboardButton(
             text=name,
-            callback_data=name
+            callback_data=TourSpecItemCallbackFactory(spec_item=name).pack()
         ))
 
     button_tours = InlineKeyboardButton(
