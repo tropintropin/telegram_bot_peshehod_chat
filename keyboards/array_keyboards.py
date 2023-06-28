@@ -37,7 +37,7 @@ def create_tours_list_inline_kb(width: int, user_dict: dict[str, dict[str, str]]
     return kb_builder.as_markup()
 
 
-def create_tour_specs_inline_kb(width: int, user_dict: dict[str, str | dict]) -> InlineKeyboardMarkup:
+def create_tour_specs_inline_kb(width: int, user_dict: dict[str, str | dict], tour) -> InlineKeyboardMarkup:
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = []
 
@@ -46,7 +46,7 @@ def create_tour_specs_inline_kb(width: int, user_dict: dict[str, str | dict]) ->
     for name, description in specs.items():
         buttons.append(InlineKeyboardButton(
             text=name,
-            callback_data=TourSpecItemCallbackFactory(item=name).pack()
+            callback_data=TourSpecItemCallbackFactory(tours=tour, item=name).pack()
         ))
 
     button_tours = InlineKeyboardButton(
