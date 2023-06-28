@@ -19,6 +19,11 @@ def load_config(path: str | None = None) -> Config:
     return Config(tg_bot=TgBot(token=env('BOT_TOKEN')))
 
 
-class TourSpecsCallbackFactory(CallbackData, prefix='tour'):
+class TourSpecsCallbackFactory(CallbackData, prefix='tour_specs'):
     pass
+
+
+class TourSpecItemCallbackFactory(CallbackData, prefix='spec_item'):
+    spec_item: str | bool
+
 
