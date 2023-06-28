@@ -4,10 +4,10 @@ from aiogram import F, Router
 from aiogram.filters import Command, Text
 from aiogram.types import Message, CallbackQuery
 
-from config_data.config import TourSpecItemCallbackFactory
+from config_data.config import ToursCallbackFactory, TourSpecItemCallbackFactory
 from keyboards.array_keyboards import create_tours_inline_kb, create_tours_list_inline_kb, create_tour_specs_inline_kb
 from lexicon.lexicon import LEXICON_RU
-from services.services import get_tours_list, cut_tour_specs_for_keyboard, get_faq_sections, get_tour_specs, get_group_tours_list, get_private_tours_list
+from services.services import get_tours_list, get_faq_sections, get_tour_specs, get_group_tours_list, get_private_tours_list
 
 
 router: Router = Router()
@@ -23,10 +23,10 @@ async def process_tour_spec_item_press(callback: CallbackQuery,
     await callback.message.answer(text=spec[callback_data.spec_item])
 
 
-# TODO: Do correct filter!
-@router.callback_query(Text(text='vr_petra_ochami'))
-async def process_tour_specs_press(callback: CallbackQuery):
-    tour_specs = get_tour_specs(callback.data)
+@router.callback_query(ToursCallbackFactory.filter())
+async def process_tour_specs_press(callback: CallbackQuery,
+                                callback_data: ToursCallbackFactory):
+    tour_specs = get_tour_specs(callback_data.tours)
 
     await callback.message.answer(text=fr"<strong>{tour_specs['Название']}</strong>")
     await callback.message.answer(text=tour_specs['О чём экскурсия?'])
