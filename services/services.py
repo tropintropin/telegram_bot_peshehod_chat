@@ -1,15 +1,17 @@
+from aiogram.types import CallbackQuery
+
 import json
 
 
 def get_faq_sections() -> dict[str, dict[str, dict[str, str]]]:
-    with open('lexicon/faq.json', 'r', encoding='utf-8') as faq:
-        sections: dict[str, dict[str, dict[str, str]]] = json.load(faq)['sections']
+    with open('lexicon/faq.json', 'r', encoding='utf-8') as f:
+        sections: dict[str, dict[str, dict[str, str]]] = json.load(f)['sections']
     return sections
 
 
 def get_tours_list() -> dict[str, dict[str, str]]:
-    with open('lexicon/tours_list.json', 'r', encoding='utf-8') as tours_list:
-        tours: dict[str, dict[str, str]] = json.load(tours_list)['tours']
+    with open('lexicon/tours_list.json', 'r', encoding='utf-8') as f:
+        tours: dict[str, dict[str, str]] = json.load(f)['tours']
     return tours
 
 
