@@ -13,12 +13,10 @@ from services.services import get_tours_list, get_faq_sections, get_tour_specs, 
 router: Router = Router()
 
 
-# TODO: Do correct handler!
-# TODO: Нужно сделать класс для обработки туров и совать его в get_tours_list()
 @router.callback_query(TourSpecItemCallbackFactory.filter())
 async def process_tour_spec_item_press(callback: CallbackQuery,
                                 callback_data: TourSpecItemCallbackFactory):
-    spec = get_tours_list()['vr_petra_ochami']
+    spec = get_tours_list()[callback_data.tours]
     await callback.message.answer(text=fr'<strong>{callback_data.item}</strong>')
     await callback.message.answer(text=spec[callback_data.item])
 
@@ -31,7 +29,7 @@ async def process_tour_specs_press(callback: CallbackQuery,
     await callback.message.answer(text=fr"<strong>{tour_specs['Название']}</strong>")
     await callback.message.answer(text=tour_specs['О чём экскурсия?'])
 
-    tour_specs_keyboard = create_tour_specs_inline_kb(1, tour_specs)
+    tour_specs_keyboard = create_tour_specs_inline_kb(2, tour_specs, callback_data.tours)
     await callback.message.answer(
         text=r'<strong>Дополнительные данные по туру:</strong>',
         reply_markup=tour_specs_keyboard
