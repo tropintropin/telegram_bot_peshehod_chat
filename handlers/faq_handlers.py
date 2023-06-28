@@ -19,8 +19,8 @@ router: Router = Router()
 async def process_tour_spec_item_press(callback: CallbackQuery,
                                 callback_data: TourSpecItemCallbackFactory):
     spec = get_tours_list()['vr_petra_ochami']
-    await callback.message.answer(text=fr'<strong>{callback_data.spec_item}</strong>')
-    await callback.message.answer(text=spec[callback_data.spec_item])
+    await callback.message.answer(text=fr'<strong>{callback_data.item}</strong>')
+    await callback.message.answer(text=spec[callback_data.item])
 
 
 @router.callback_query(ToursCallbackFactory.filter())

@@ -46,7 +46,7 @@ def create_tour_specs_inline_kb(width: int, user_dict: dict[str, str | dict]) ->
     for name, description in specs.items():
         buttons.append(InlineKeyboardButton(
             text=name,
-            callback_data=TourSpecItemCallbackFactory(spec_item=name).pack()
+            callback_data=TourSpecItemCallbackFactory(item=name).pack()
         ))
 
     button_tours = InlineKeyboardButton(

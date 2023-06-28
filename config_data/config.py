@@ -23,7 +23,7 @@ class ToursCallbackFactory(CallbackData, prefix='tours'):
     tours: str
 
 
-class TourSpecItemCallbackFactory(CallbackData, prefix='spec_item'):
-    spec_item: str | bool
+class TourSpecItemCallbackFactory(CallbackData, prefix='item'):
+    item: str
 
 
