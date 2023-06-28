@@ -2,6 +2,7 @@ from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
 from lexicon.lexicon import LEXICON_RU
+from services.services import cut_tour_specs_for_keyboard
 
 
 # Создаем объекты кнопок клавиатуры
@@ -43,13 +44,12 @@ def create_tour_specs_inline_kb(width: int, user_dict: dict[str, str | dict]) ->
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = []
 
-    for key in ['is_group_tour', 'Название', 'О чём экскурсия?']:
-        user_dict.pop(key, None)
+    specs: dict = cut_tour_specs_for_keyboard(user_dict)
 
-    for name, description in user_dict.items():
+    for name, description in specs.items():
         buttons.append(InlineKeyboardButton(
             text=name,
-            callback_data='CALLBACK'  # TODO: Change callback to description's value
+            callback_data=name
         ))
 
     button_tours = InlineKeyboardButton(
