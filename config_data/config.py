@@ -19,8 +19,8 @@ def load_config(path: str | None = None) -> Config:
     return Config(tg_bot=TgBot(token=env('BOT_TOKEN')))
 
 
-class TourSpecsCallbackFactory(CallbackData, prefix='tour_specs'):
-    pass
+class ToursCallbackFactory(CallbackData, prefix='tours'):
+    tours: str
 
 
 class TourSpecItemCallbackFactory(CallbackData, prefix='spec_item'):
