@@ -1,4 +1,4 @@
-'''Here are the handlers for the FAQ Section.
+'''Here are the handlers for the Tours Section.
 '''
 from aiogram import F, Router
 from aiogram.filters import Command, Text
