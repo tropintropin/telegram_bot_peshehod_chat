@@ -1,4 +1,6 @@
-"""Here are the settings for the main menu of the bot"""
+"""Settings for the main menu of the bot.
+Commands set using this function will be displayed in the main menu of the bot
+"""
 
 from aiogram import Bot
 from aiogram.types import BotCommand
