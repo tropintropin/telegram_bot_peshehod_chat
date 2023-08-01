@@ -6,7 +6,7 @@ from aiogram.filters import Command, Text
 from aiogram.types import Message, CallbackQuery
 
 from config_data.config import ToursCallbackFactory, TourSpecItemCallbackFactory
-from keyboards.array_keyboards import create_tours_inline_kb, create_tours_list_inline_kb, create_tour_specs_inline_kb
+from keyboards.inline_keyboards import create_tours_inline_kb, create_tours_list_inline_kb, create_tour_specs_inline_kb
 from lexicon.lexicon import LEXICON_RU
 from services.services import get_tours_list, get_faq_sections, get_tour_specs, get_group_tours_list, get_private_tours_list
 
