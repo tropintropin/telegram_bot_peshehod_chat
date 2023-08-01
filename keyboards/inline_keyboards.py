@@ -1,3 +1,6 @@
+"""Inline keyboards for the Telegram bot.
+"""
+
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
@@ -6,6 +9,7 @@ from lexicon.lexicon import LEXICON_RU
 from services.services import cut_tour_specs_for_keyboard
 
 
+# Creates an inline keyboard with two buttons: "Group Tours" and "Individual Tours"
 def create_tours_inline_kb() -> InlineKeyboardMarkup:
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = [
@@ -16,6 +20,7 @@ def create_tours_inline_kb() -> InlineKeyboardMarkup:
     return kb_builder.as_markup()
 
 
+# Creates an inline keyboard with buttons for the list of tours
 def create_tours_list_inline_kb(width: int, user_dict: dict[str, dict[str, str]]) -> InlineKeyboardMarkup:
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = []
@@ -37,6 +42,7 @@ def create_tours_list_inline_kb(width: int, user_dict: dict[str, dict[str, str]]
     return kb_builder.as_markup()
 
 
+# Creates an inline keyboard with buttons for the list of tour specifications
 def create_tour_specs_inline_kb(width: int, user_dict: dict[str, str | dict], tour) -> InlineKeyboardMarkup:
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = []
