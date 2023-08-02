@@ -9,6 +9,12 @@ from lexicon.lexicon import LEXICON_COMMANDS
 
 
 async def set_main_menu(bot: Bot):
+    """
+    Sets the commands that will be displayed in the main menu of the bot.
+
+    :param bot: An instance of the Bot class representing the bot to apply the menu.
+    :type bot: aiogram.Bot
+    """
     main_menu_commands = [
         BotCommand(
             command=command,
