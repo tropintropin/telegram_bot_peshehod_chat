@@ -2,8 +2,6 @@
 and processing information from handlers and keyboards.
 """
 
-from aiogram.types import CallbackQuery
-
 import copy
 import json
 
