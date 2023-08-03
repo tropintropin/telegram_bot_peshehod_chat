@@ -5,13 +5,13 @@ from aiogram import F, Router
 from aiogram.filters import Command
 from aiogram.types import CallbackQuery, Message
 
+from keyboards.inline_keyboards import create_faq_section_list_inline_kb
 from services.services import get_faq_sections
-
 
 router: Router = Router()
 
 
-@router.callback_query(F.text == 'faq')
+@router.callback_query(F.data == 'faq')
 async def process_faq_press(callback: CallbackQuery):
     """
     Handle the callback query when the "FAQ" button is pressed.
@@ -23,9 +23,14 @@ async def process_faq_press(callback: CallbackQuery):
     :type callback: aiogram.types.CallbackQuery
     """
     sections = get_faq_sections()
-    # TODO: Create keyboard from list
+    faq_section_keyboard = create_faq_section_list_inline_kb(
+        width=1,
+        user_dict=sections
+        )
+
     await callback.message.answer(
-        text='\n\n'.join(sections.keys())
+        text='Выберите тему:',
+        reply_markup=faq_section_keyboard
         )
 
 
@@ -41,7 +46,12 @@ async def process_faq_command(message: Message):
     :type message: aiogram.types.Message
     """
     sections = get_faq_sections()
-    # TODO: Create keyboard from list
+    faq_section_keyboard = create_faq_section_list_inline_kb(
+        width=1,
+        user_dict=sections
+        )
+
     await message.answer(
-        text='\n\n'.join(sections.keys())
+        text='Выберите тему:',
+        reply_markup=faq_section_keyboard
         )
