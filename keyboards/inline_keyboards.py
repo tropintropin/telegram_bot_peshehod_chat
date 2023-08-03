@@ -98,4 +98,18 @@ def create_tour_specs_inline_kb(width: int, user_dict: dict[str, str | dict], to
     kb_builder.row(button_tours)
 
     return kb_builder.as_markup()
-    
+
+
+def create_faq_section_list_inline_kb(width: int, user_dict: dict) -> InlineKeyboardMarkup:
+    kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
+    buttons: list[InlineKeyboardButton] = []
+
+    for section, content in user_dict.items():
+        buttons.append(InlineKeyboardButton(
+            text=section,
+            callback_data=content['callback']
+        ))
+
+    kb_builder.row(*buttons, width=width)
+
+    return kb_builder.as_markup()
