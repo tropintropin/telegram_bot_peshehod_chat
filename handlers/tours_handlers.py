@@ -2,13 +2,17 @@
 '''
 
 from aiogram import F, Router
-from aiogram.filters import Command, MagicData
-from aiogram.types import Message, CallbackQuery
+from aiogram.filters import Command
+from aiogram.types import CallbackQuery, Message
 
-from config_data.config import ToursCallbackFactory, TourSpecItemCallbackFactory
-from keyboards.inline_keyboards import create_tours_inline_kb, create_tours_list_inline_kb, create_tour_specs_inline_kb
+from config_data.config import (ToursCallbackFactory,
+                                TourSpecItemCallbackFactory)
+from keyboards.inline_keyboards import (create_tour_specs_inline_kb,
+                                        create_tours_inline_kb,
+                                        create_tours_list_inline_kb)
 from lexicon.lexicon import LEXICON_RU
-from services.services import get_tours_list, get_faq_sections, get_tour_specs, get_group_tours_list, get_private_tours_list
+from services.services import (get_group_tours_list, get_private_tours_list,
+                                get_tour_specs, get_tours_list)
 
 
 router: Router = Router()
@@ -137,39 +141,4 @@ async def process_private_tours_press(callback: CallbackQuery):
     await callback.message.answer(
         text=LEXICON_RU['private_tours'],
         reply_markup=private_tours_keyboard
-        )
-
-
-@router.callback_query(F.text == 'faq')
-async def process_faq_press(callback: CallbackQuery):
-    """
-    Handle the callback query when the "FAQ" button is pressed.
-
-    This function processes the callback query when the "FAQ" button is pressed.
-    It sends the sections from the FAQ using an inline keyboard.
-
-    :param callback: The callback query object.
-    :type callback: aiogram.types.CallbackQuery
-    """
-    sections = get_faq_sections()
-    # TODO: Create keyboard from list
-    await callback.message.answer(
-        text='\n\n'.join(sections.keys())
-        )
-
-@router.message(Command(commands='faq'))
-async def process_faq_command(message: Message):
-    """
-    Handle the command "/faq".
-
-    This function processes the command "/faq" and sends the sections
-    from the FAQ using an inline keyboard.
-
-    :param message: The received message object.
-    :type message: aiogram.types.Message
-    """
-    sections = get_faq_sections()
-    # TODO: Create keyboard from list
-    await message.answer(
-        text='\n\n'.join(sections.keys())
         )
