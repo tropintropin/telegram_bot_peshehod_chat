@@ -2,7 +2,7 @@
 '''
 
 from aiogram import F, Router
-from aiogram.filters import Command, Text
+from aiogram.filters import Command, MagicData
 from aiogram.types import Message, CallbackQuery
 
 from config_data.config import ToursCallbackFactory, TourSpecItemCallbackFactory
@@ -58,8 +58,7 @@ async def process_tour_specs_press(callback: CallbackQuery,
         reply_markup=tour_specs_keyboard
         )
 
-
-@router.callback_query(Text(text='tours'))
+@router.callback_query(F.data == 'tours')
 async def process_tours_press(callback: CallbackQuery):
     """
     Handle the callback query when the "Tours" button is pressed.
@@ -95,7 +94,7 @@ async def process_tours_command(message: Message):
         )
 
 
-@router.callback_query(Text(text='group_tours'))
+@router.callback_query(F.data == 'group_tours')
 async def process_group_tours_press(callback: CallbackQuery):
     """
     Handle the callback query when the "Group Tours" button is pressed.
@@ -113,7 +112,7 @@ async def process_group_tours_press(callback: CallbackQuery):
         )
 
 
-@router.callback_query(Text(text='private_tours'))
+@router.callback_query(F.data == 'private_tours')
 async def process_private_tours_press(callback: CallbackQuery):
     """
     Handle the callback query when the "Private Tours" button is pressed.
@@ -131,7 +130,7 @@ async def process_private_tours_press(callback: CallbackQuery):
         )
 
 
-@router.callback_query(Text(text='faq'))
+@router.callback_query(F.data == 'faq')
 async def process_faq_press(callback: CallbackQuery):
     """
     Handle the callback query when the "FAQ" button is pressed.
