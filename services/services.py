@@ -62,7 +62,7 @@ def get_private_tours_list():
     return private_tours
 
 
-def get_tour_specs(callback: str | CallbackQuery) -> dict:
+def get_tour_specs(callback: str) -> dict:
     """
     Retrieves the tour specifications by its name from the list of all tours.
     
