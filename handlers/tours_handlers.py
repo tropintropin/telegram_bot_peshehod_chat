@@ -20,17 +20,26 @@ async def process_tour_spec_item_press(callback: CallbackQuery,
     """
     Handle the callback query when a tour specification item's button is pressed.
 
-    This function processes the callback query when a tour specification item's button is pressed.
+    This function processes the callback query when a button associated with a specific tour specification item is pressed.
     It retrieves the tour specifications and sends the corresponding information as a response.
+    Additionally, it provides buttons for other tour specifications related to the same tour.
 
-    :param callback: The callback query object.
+    :param callback: The callback query object representing the user's interaction with the button.
     :type callback: aiogram.types.CallbackQuery
     :param callback_data: The callback data containing the tour and the specific item.
     :type callback_data: TourSpecItemCallbackFactory
     """
     spec = get_tours_list()[callback_data.tours]
+    tour_specs = get_tour_specs(callback_data.tours)
+    tour_specs_keyboard = create_tour_specs_inline_kb(2, tour_specs, callback_data.tours)
+
+    
     await callback.message.answer(text=fr'<strong>{callback_data.item}</strong>')
     await callback.message.answer(text=spec[callback_data.item])
+    await callback.message.answer(
+        text=r'<strong>Другие вопросы:</strong>',
+        reply_markup=tour_specs_keyboard
+        )
 
 
 @router.callback_query(ToursCallbackFactory.filter())
@@ -57,6 +66,7 @@ async def process_tour_specs_press(callback: CallbackQuery,
         text=r'<strong>Дополнительные данные по туру:</strong>',
         reply_markup=tour_specs_keyboard
         )
+
 
 @router.callback_query(F.data == 'tours')
 async def process_tours_press(callback: CallbackQuery):
@@ -130,7 +140,7 @@ async def process_private_tours_press(callback: CallbackQuery):
         )
 
 
-@router.callback_query(F.data == 'faq')
+@router.callback_query(F.text == 'faq')
 async def process_faq_press(callback: CallbackQuery):
     """
     Handle the callback query when the "FAQ" button is pressed.
