@@ -14,8 +14,14 @@ def get_faq_sections() -> dict[str, dict[str, dict[str, str]]]:
     :rtype: dict[str, dict[str, dict[str, str]]]
     """
     with open('lexicon/faq.json', 'r', encoding='utf-8') as f:
-        sections: dict[str, dict[str, dict[str, str]]] = json.load(f)['sections']
+        sections: dict[str, dict[str, str | dict]] = json.load(f)['sections']
     return sections
+
+
+def cut_faq_section_items(user_dict: dict) -> dict:
+    items: dict = copy.deepcopy(user_dict)
+    del items['section_name']
+    return items
 
 
 def get_tours_list() -> dict[str, dict[str, str]]:
