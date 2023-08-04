@@ -2,9 +2,10 @@
 Classes for generating callback data for buttons.
 """
 
-from aiogram.filters.callback_data import CallbackData
 from dataclasses import dataclass
 from environs import Env
+
+from aiogram.filters.callback_data import CallbackData
 
 
 @dataclass
@@ -48,6 +49,14 @@ def load_config(path: str | None = None) -> Config:
     env = Env()
     env.read_env(path)
     return Config(tg_bot=TgBot(token=env('BOT_TOKEN')))
+
+
+class FAQCallbackFactory(CallbackData, prefix='f'):
+    section: str
+
+
+class ItemsFAQCallbackFactory(FAQCallbackFactory, prefix='fi'):
+    item: str
 
 
 class ToursCallbackFactory(CallbackData, prefix='t'):
