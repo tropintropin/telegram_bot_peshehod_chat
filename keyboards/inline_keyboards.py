@@ -4,7 +4,9 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from config_data.config import ToursCallbackFactory, TourSpecItemCallbackFactory
+from config_data.config import (FAQCallbackFactory, ItemsFAQCallbackFactory,
+                                ToursCallbackFactory,
+                                TourSpecItemCallbackFactory)
 from lexicon.lexicon import LEXICON_RU
 from services.services import cut_tour_specs_for_keyboard
 
@@ -104,10 +106,25 @@ def create_faq_section_list_inline_kb(width: int, user_dict: dict) -> InlineKeyb
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = []
 
-    for section, content in user_dict.items():
+    for callback, section in user_dict.items():
         buttons.append(InlineKeyboardButton(
-            text=section,
-            callback_data=content['callback']
+            text=section['section_name'],
+            callback_data=FAQCallbackFactory(section=callback).pack()
+        ))
+
+    kb_builder.row(*buttons, width=width)
+
+    return kb_builder.as_markup()
+
+
+def create_faq_section_item_inline_kb(width: int, user_dict: dict, section: str) -> InlineKeyboardMarkup:
+    kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
+    buttons: list[InlineKeyboardButton] = []
+
+    for callback, item in user_dict.items():
+        buttons.append(InlineKeyboardButton(
+            text=item['question'],
+            callback_data=ItemsFAQCallbackFactory(section=section, item=callback).pack()
         ))
 
     kb_builder.row(*buttons, width=width)
