@@ -4,6 +4,7 @@
 [![version badge](https://img.shields.io/badge/Python-3.10_|_3.11-blue.svg)](https://docs.aiogram.dev/en/dev-3.x/)
 [![version badge](https://img.shields.io/badge/aiogram-3.0.0b9-blue.svg)](https://docs.aiogram.dev/en/dev-3.x/)
 [![Telegram Bot API](https://img.shields.io/badge/dynamic/json?color=blue&logo=telegram&label=Telegram%20Bot%20API&query=%24.api.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Faiogram%2Faiogram%2Fdev-3.x%2F.butcher%2Fschema%2Fschema.json&style=flat-square)](https://core.telegram.org/bots/api)
+
 [![copyright](https://img.shields.io/badge/©_Peshehod_Tour-2023-blue.svg)](https://peshehodtour.ru)
 [![developer](https://img.shields.io/badge/Developer-Valery_Tropin-blue.svg)](https://tropin.one)
 
