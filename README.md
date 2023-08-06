@@ -68,9 +68,10 @@ section     Production
 
 ```mermaid
 graph LR
-    id0{<strong>/start</strong>}
+    id0{<strong>Точка входа<br>/start</strong>}
     id0 ==> id1{{Вводое слово}}
-    id0 ==> id9{{Главное меню<br>с командами}}
+    id0 ==> id9{{<i>Главное меню<br>с командами</i>}}
+    id0 ==> id10{{<i>Справка<br>/help<i>}}
     id1 --> id8[(База данных<br>пользователей)]
     id1 --> id2{{ЧАВо}}
         id2 -.-> id20>Оплата и бронирование]
