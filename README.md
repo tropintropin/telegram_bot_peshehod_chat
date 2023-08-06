@@ -1,10 +1,13 @@
 # Бот-помощник в Telegram для компании «Пешеход Тур»
 
 [![wakatime](https://wakatime.com/badge/github/tropintropin/telegram_bot_peshehod_chat.svg)](https://wakatime.com/badge/github/tropintropin/telegram_bot_peshehod_chat)
+[![version badge](https://img.shields.io/badge/aiogram-3.0.0b9-blue.svg)](https://docs.aiogram.dev/en/dev-3.x/)
+[![copyright](https://img.shields.io/badge/©_Пешеход_Тур-2023-blue.svg)](https://peshehodtour.ru)
+[![developer](https://img.shields.io/badge/Разработчик-Валерий_Тропин-blue.svg)](https://tropin.one)
 
-©2023 [Пешеход Тур](https://peshehodtour.ru)
+Бот написан по заказу компании [«Пешеход Тур»](https://peshehodtour.ru) в 2023 году.
 
-Разработчик: Валерий Тропин, [tropin.one](https://tropin.one)
+Разработчик Валерий Тропин — [tropin.one](https://tropin.one).
 
 ## Стек
 
