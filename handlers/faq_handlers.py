@@ -34,7 +34,7 @@ async def process_faq_specs_item_press(callback: CallbackQuery,
 
         item_specs = get_faq_sections()[callback_data.section][callback_data.item]
         await callback.message.answer(text=fr"<strong>{item_specs['question']}</strong>")
-        await callback.message.answer(text=fr"<strong>{item_specs['answer']}</strong>")
+        await callback.message.answer(text=item_specs['answer'])
 
         
 
