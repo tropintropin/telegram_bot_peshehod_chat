@@ -1,9 +1,7 @@
 LEXICON_COMMANDS: dict[str, str] = {
-    '/start': 'В начало',
     '/help': 'Помощь',
-    '/faq': 'Частые вопросы',
-    '/tours': 'Список всех туров',
-    '/cancel': 'Отмена'
+    '/faq': 'Частые вопросы и ответы',
+    '/tours': 'Список всех туров'
 }
 
 LEXICON_RU: dict[str, str] = {
