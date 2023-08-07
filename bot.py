@@ -6,7 +6,8 @@ import asyncio
 from aiogram import Bot, Dispatcher
 
 from config_data.config import Config, load_config
-from handlers import other_handlers, tours_handlers, user_handlers
+from handlers import (faq_handlers, other_handlers,
+                        tours_handlers, user_handlers)
 from keyboards.main_menu import set_main_menu
 
 
@@ -20,6 +21,7 @@ async def main() -> None:
 
     # Connecting handlers
     dp.include_router(user_handlers.router)
+    dp.include_router(faq_handlers.router)
     dp.include_router(tours_handlers.router)
     dp.include_router(other_handlers.router)
 
