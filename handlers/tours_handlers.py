@@ -37,13 +37,13 @@ async def process_tour_spec_item_press(callback: CallbackQuery,
     tour_specs = get_tour_specs(callback_data.tours)
     tour_specs_keyboard = create_tour_specs_inline_kb(2, tour_specs, callback_data.tours)
 
-    
-    await callback.message.answer(text=fr'<strong>{callback_data.item}</strong>')
-    await callback.message.answer(text=spec[callback_data.item])
-    await callback.message.answer(
-        text=r'<strong>Другие вопросы:</strong>',
-        reply_markup=tour_specs_keyboard
-        )
+    if callback.message:
+        await callback.message.answer(text=fr'<strong>{callback_data.item}</strong>')
+        await callback.message.answer(text=spec[callback_data.item])
+        await callback.message.answer(
+            text=r'<strong>Другие вопросы:</strong>',
+            reply_markup=tour_specs_keyboard
+            )
 
 
 @router.callback_query(ToursCallbackFactory.filter())
@@ -60,16 +60,17 @@ async def process_tour_specs_press(callback: CallbackQuery,
     :param callback_data: The callback data containing the tour.
     :type callback_data: ToursCallbackFactory
     """
-    tour_specs = get_tour_specs(callback_data.tours)
 
-    await callback.message.answer(text=fr"<strong>{tour_specs['Название']}</strong>")
-    await callback.message.answer(text=tour_specs['О чём экскурсия?'])
+    if callback.message:
+        tour_specs = get_tour_specs(callback_data.tours)
+        await callback.message.answer(text=fr"<strong>{tour_specs['Название']}</strong>")
+        await callback.message.answer(text=tour_specs['О чём экскурсия?'])
 
-    tour_specs_keyboard = create_tour_specs_inline_kb(2, tour_specs, callback_data.tours)
-    await callback.message.answer(
-        text=r'<strong>Дополнительные данные по туру:</strong>',
-        reply_markup=tour_specs_keyboard
-        )
+        tour_specs_keyboard = create_tour_specs_inline_kb(2, tour_specs, callback_data.tours)
+        await callback.message.answer(
+            text=r'<strong>Дополнительные данные по туру:</strong>',
+            reply_markup=tour_specs_keyboard
+            )
 
 
 @router.callback_query(F.data == 'tours')
@@ -83,12 +84,14 @@ async def process_tours_press(callback: CallbackQuery):
     :param callback: The callback query object.
     :type callback: aiogram.types.CallbackQuery
     """
-    tours_keyboard = create_tours_inline_kb()
-    await callback.message.answer(text=r'<strong>Список всех туров</strong>')
-    await callback.message.answer(
-        text=LEXICON_RU['tours'],
-        reply_markup=tours_keyboard
-        )
+
+    if callback.message:
+        tours_keyboard = create_tours_inline_kb()
+        await callback.message.answer(text=r'<strong>Список всех туров</strong>')
+        await callback.message.answer(
+            text=LEXICON_RU['tours'],
+            reply_markup=tours_keyboard
+            )
 
 
 @router.message(Command(commands='tours'))
@@ -121,12 +124,14 @@ async def process_group_tours_press(callback: CallbackQuery):
     :param callback: The callback query object.
     :type callback: aiogram.types.CallbackQuery
     """
-    group_tours_keyboard = create_tours_list_inline_kb(1, get_group_tours_list())
-    await callback.message.answer(text=r'<strong>Групповые туры</strong>')
-    await callback.message.answer(
-        text=LEXICON_RU['group_tours'],
-        reply_markup=group_tours_keyboard
-        )
+
+    if callback.message:
+        group_tours_keyboard = create_tours_list_inline_kb(1, get_group_tours_list())
+        await callback.message.answer(text=r'<strong>Групповые туры</strong>')
+        await callback.message.answer(
+            text=LEXICON_RU['group_tours'],
+            reply_markup=group_tours_keyboard
+            )
 
 
 @router.callback_query(F.data == 'private_tours')
@@ -140,9 +145,11 @@ async def process_private_tours_press(callback: CallbackQuery):
     :param callback: The callback query object.
     :type callback: aiogram.types.CallbackQuery
     """
-    private_tours_keyboard = create_tours_list_inline_kb(1, get_private_tours_list())
-    await callback.message.answer(text=r'<strong>Частные туры</strong>')
-    await callback.message.answer(
-        text=LEXICON_RU['private_tours'],
-        reply_markup=private_tours_keyboard
-        )
+
+    if callback.message:
+        private_tours_keyboard = create_tours_list_inline_kb(1, get_private_tours_list())
+        await callback.message.answer(text=r'<strong>Частные туры</strong>')
+        await callback.message.answer(
+            text=LEXICON_RU['private_tours'],
+            reply_markup=private_tours_keyboard
+            )

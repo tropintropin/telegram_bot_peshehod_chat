@@ -6,15 +6,15 @@ import copy
 import json
 
 
-def get_faq_sections() -> dict[str, dict[str, dict[str, str]]]:
+def get_faq_sections() -> dict[str, dict[str, str | dict[str, str]]]:
     """
     Retrieves sections and questions from the 'faq.json' file.
     
     :return: A dictionary containing sections and their associated questions.
-    :rtype: dict[str, dict[str, dict[str, str]]]
+    :rtype: dict[str, dict[str, str | dict[str, str]]]
     """
     with open('lexicon/faq.json', 'r', encoding='utf-8') as f:
-        sections: dict[str, dict[str, str | dict]] = json.load(f)['sections']
+        sections: dict[str, dict[str, str | dict[str, str]]] = json.load(f)['sections']
     return sections
 
 

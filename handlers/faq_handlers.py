@@ -21,20 +21,21 @@ async def process_faq_specs_item_press(callback: CallbackQuery,
     if callback_data.item == 'tours':  # Move to Tours Section if true
         await process_tours_press(callback)
     else:
-        await callback.message.delete()
+        if callback.message:
+            await callback.message.delete()
 
-        items_list = get_faq_sections()[callback_data.section]
-        list_name = items_list['section_name']
-        items_list = cut_faq_section_items(items_list)
-        items_list_keyboard = create_faq_section_item_inline_kb(1, items_list, callback_data.section)
-        await callback.message.answer(
-        text=fr"<strong>{list_name}</strong>",
-        reply_markup=items_list_keyboard
-        )
+            items_list = get_faq_sections()[callback_data.section]
+            list_name = items_list['section_name']
+            items_list = cut_faq_section_items(items_list)
+            items_list_keyboard = create_faq_section_item_inline_kb(1, items_list, callback_data.section)
+            await callback.message.answer(
+                text=fr"<strong>{list_name}</strong>",
+                reply_markup=items_list_keyboard
+                )
 
-        item_specs = get_faq_sections()[callback_data.section][callback_data.item]
-        await callback.message.answer(text=fr"<strong>{item_specs['question']}</strong>")
-        await callback.message.answer(text=item_specs['answer'])
+            item_specs = items_list[callback_data.item]
+            await callback.message.answer(text=fr"<strong>{item_specs['question']}</strong>")
+            await callback.message.answer(text=item_specs['answer'])
 
         
 
@@ -42,29 +43,34 @@ async def process_faq_specs_item_press(callback: CallbackQuery,
 @router.callback_query(FAQCallbackFactory.filter())
 async def process_faq_specs_press(callback: CallbackQuery,
                                     callback_data: FAQCallbackFactory):
-    sections = get_faq_sections()
-    faq_section_keyboard = create_faq_section_list_inline_kb(
-        width=1,
-        user_dict=sections
-        )
+    if callback.message:
+        sections = get_faq_sections()
+        faq_section_keyboard = create_faq_section_list_inline_kb(
+            width=1,
+            user_dict=sections
+            )
     
-    section = sections[callback_data.section]
-    list_name = section['section_name']
-    items_list = cut_faq_section_items(section)
-    
-    items_list_keyboard = create_faq_section_item_inline_kb(1, items_list, callback_data.section)
+        section = sections[callback_data.section]
+        list_name = section['section_name']
+        items_list = cut_faq_section_items(section)
+        
+        items_list_keyboard = create_faq_section_item_inline_kb(
+            width=1,
+            user_dict=items_list,
+            section=callback_data.section
+            )
+        
+        await callback.message.delete()
 
-    await callback.message.delete()
-
-    await callback.message.answer(
+        await callback.message.answer(
             text=r'<strong>ЧАВо (список частых вопросов и ответов):</strong>',
             reply_markup=faq_section_keyboard
             )
 
-    await callback.message.answer(
-        text=fr'<strong>{list_name}</strong>',
-        reply_markup=items_list_keyboard
-        )
+        await callback.message.answer(
+            text=fr'<strong>{list_name}</strong>',
+            reply_markup=items_list_keyboard
+            )
 
 
 @router.callback_query(F.data == 'faq')
@@ -78,16 +84,18 @@ async def process_faq_press(callback: CallbackQuery):
     :param callback: The callback query object.
     :type callback: aiogram.types.CallbackQuery
     """
-    sections = get_faq_sections()
-    faq_section_keyboard = create_faq_section_list_inline_kb(
-        width=1,
-        user_dict=sections
-        )
 
-    await callback.message.answer(
-        text=r'<strong>ЧАВо (список частых вопросов и ответов):</strong>',
-        reply_markup=faq_section_keyboard
-        )
+    if callback.message:
+        sections = get_faq_sections()
+        faq_section_keyboard = create_faq_section_list_inline_kb(
+            width=1,
+            user_dict=sections
+            )
+
+        await callback.message.answer(
+            text=r'<strong>ЧАВо (список частых вопросов и ответов):</strong>',
+            reply_markup=faq_section_keyboard
+            )
 
 
 @router.message(Command(commands='faq'))
