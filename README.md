@@ -1,7 +1,7 @@
 # Бот-помощник в Telegram для компании «Пешеход Тур»
 
 [![wakatime](https://wakatime.com/badge/github/tropintropin/telegram_bot_peshehod_chat.svg)](https://wakatime.com/badge/github/tropintropin/telegram_bot_peshehod_chat)
-[![version badge](https://img.shields.io/badge/Python-3.10_|_3.11-blue.svg)](https://docs.aiogram.dev/en/dev-3.x/)
+[![version badge](https://img.shields.io/badge/Python-3.10_|_3.11-blue.svg)](https://www.python.org/)
 [![version badge](https://img.shields.io/badge/aiogram-3.0.0rc1-blue.svg)](https://docs.aiogram.dev/en/dev-3.x/)
 [![Telegram Bot API](https://img.shields.io/badge/dynamic/json?color=blue&logo=telegram&label=Telegram%20Bot%20API&query=%24.api.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Faiogram%2Faiogram%2Fdev-3.x%2F.butcher%2Fschema%2Fschema.json&style=flat-square)](https://core.telegram.org/bots/api)
 
