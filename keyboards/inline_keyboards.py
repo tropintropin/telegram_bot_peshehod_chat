@@ -11,6 +11,19 @@ from lexicon.lexicon import LEXICON_RU
 from services.services import cut_tour_specs_for_keyboard
 
 
+def create_startup_inline_kb() -> InlineKeyboardMarkup :
+    """DOCSTRING"""
+    kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
+    buttons: list[InlineKeyboardButton] = [
+        InlineKeyboardButton(text='ЧАВо (частые вопросы и ответы)', callback_data='faq'),
+        InlineKeyboardButton(text='Посмотреть список туров', callback_data='tours'),
+        InlineKeyboardButton(text='Справка', callback_data='help'),
+        InlineKeyboardButton(text='Контакты', callback_data='contacts')
+    ]
+    kb_builder.row(*buttons, width=1)
+    return kb_builder.as_markup()
+
+
 def create_tours_inline_kb() -> InlineKeyboardMarkup:
     """
     Create an inline keyboard with two buttons: 'Group Tours' and 'Private Tours'.

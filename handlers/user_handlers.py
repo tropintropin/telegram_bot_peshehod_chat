@@ -3,13 +3,13 @@
 
 from asyncio import sleep
 
-from aiogram import Router
+from aiogram import F, Router
 from aiogram.filters import Command, CommandStart
-from aiogram.types import Message
+from aiogram.types import CallbackQuery, Message
 
+from keyboards.inline_keyboards import create_startup_inline_kb
 from lexicon.greeting import greeting, instruction
 from lexicon.lexicon import LEXICON_RU
-
 
 router: Router = Router()
 
@@ -30,7 +30,11 @@ async def process_start_command(message: Message):
     await message.answer(f'{instruction}')
     await sleep(2)
     # TODO: Change the message & docstring for this answer when production:
-    await message.answer('<pre><code>Наш бот находится в разработке, скоро здесь появится новый функционал 🤗</code></pre>')
+    startup_keyboard = create_startup_inline_kb()
+    await message.answer(
+        text='<strong>Выберите интересующий вас раздел:</strong>',
+        reply_markup=startup_keyboard
+    )
 
 
 @router.message(Command(commands='help'))
@@ -44,3 +48,45 @@ async def process_help_command(message: Message):
     :type message: aiogram.types.Message
     """
     await message.answer(text=LEXICON_RU['/help'])
+    startup_keyboard = create_startup_inline_kb()
+    await message.answer(
+        text='<strong>Выберите интересующий вас раздел:</strong>',
+        reply_markup=startup_keyboard
+    )
+
+
+@router.callback_query(F.data == 'help')
+async def process_help_press(callback: CallbackQuery):
+    """DOCSTRING"""
+    if callback.message:
+        await callback.message.answer(text=LEXICON_RU['/help'])
+        startup_keyboard = create_startup_inline_kb()
+        await callback.message.answer(
+            text='<strong>Выберите интересующий вас раздел:</strong>',
+            reply_markup=startup_keyboard
+        )
+
+
+@router.message(Command(commands='contacts'))
+async def process_contacts_command(message: Message):
+    """DOCSTRING"""
+    # TODO: Change to another answer!
+    await message.answer(text=greeting)
+    startup_keyboard = create_startup_inline_kb()
+    await message.answer(
+        text='<strong>Выберите интересующий вас раздел:</strong>',
+        reply_markup=startup_keyboard
+    )
+
+
+@router.callback_query(F.data == 'contacts')
+async def process_contacts_press(callback: CallbackQuery):
+    """DOCSTRING"""
+    if callback.message:
+        # TODO: Change to another answer!
+        await callback.message.answer(text=greeting)
+        startup_keyboard = create_startup_inline_kb()
+        await callback.message.answer(
+            text='<strong>Выберите интересующий вас раздел:</strong>',
+            reply_markup=startup_keyboard
+        )
