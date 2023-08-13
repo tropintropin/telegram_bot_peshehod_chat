@@ -4,6 +4,7 @@ and processing information from handlers and keyboards.
 
 import copy
 import json
+from pathlib import Path
 
 
 def get_faq_sections() -> dict[str, dict[str, str | dict[str, str]]]:
@@ -13,7 +14,8 @@ def get_faq_sections() -> dict[str, dict[str, str | dict[str, str]]]:
     :return: A dictionary containing sections and their associated questions.
     :rtype: dict[str, dict[str, str | dict[str, str]]]
     """
-    with open('lexicon/faq.json', 'r', encoding='utf-8') as f:
+    faq_file: Path = Path('lexicon/faq.json')
+    with faq_file.open('r', encoding='utf-8') as f:
         sections: dict[str, dict[str, str | dict[str, str]]] = json.load(f)['sections']
     return sections
 
@@ -31,7 +33,8 @@ def get_tours_list() -> dict[str, dict[str, str]]:
     :return: A dictionary containing all tours with their associated details.
     :rtype: dict[str, dict[str, str]]
     """
-    with open('lexicon/tours_list.json', 'r', encoding='utf-8') as f:
+    tours_list_file: Path = Path('lexicon/tours_list.json')
+    with tours_list_file.open('r', encoding='utf-8') as f:
         tours: dict[str, dict[str, str]] = json.load(f)['tours']
     return tours
 
