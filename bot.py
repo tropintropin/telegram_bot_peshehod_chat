@@ -2,16 +2,22 @@
 """
 
 import asyncio
+import logging
 
 from aiogram import Bot, Dispatcher
 
 from config_data.config import Config, load_config
-from handlers import (faq_handlers, other_handlers,
-                        tours_handlers, user_handlers)
+from handlers import (faq_handlers, other_handlers, tours_handlers,
+                        user_handlers)
 from keyboards.main_menu import set_main_menu
 
 
 async def main() -> None:
+    file_log = logging.FileHandler("bot.log")
+    console_out = logging.StreamHandler()
+    logging.basicConfig(handlers=(file_log, console_out), level=logging.INFO)
+    logging.info('Starting bot...')
+
     # Loads the bot configuration from a file
     config: Config = load_config()
 
