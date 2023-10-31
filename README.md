@@ -2,7 +2,7 @@
 
 [![wakatime](https://wakatime.com/badge/github/tropintropin/telegram_bot_peshehod_chat.svg)](https://wakatime.com/badge/github/tropintropin/telegram_bot_peshehod_chat)
 [![version badge](https://img.shields.io/badge/Python-3.10_|_3.11-blue.svg)](https://www.python.org/)
-[![version badge](https://img.shields.io/badge/aiogram-3.0.0rc1-blue.svg)](https://docs.aiogram.dev/en/dev-3.x/)
+[![version badge](https://img.shields.io/badge/aiogram-3.2.0-blue.svg)](https://docs.aiogram.dev/en/dev-3.x/)
 [![Telegram Bot API](https://img.shields.io/badge/dynamic/json?color=blue&logo=telegram&label=Telegram%20Bot%20API&query=%24.api.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Faiogram%2Faiogram%2Fdev-3.x%2F.butcher%2Fschema%2Fschema.json&style=flat-square)](https://core.telegram.org/bots/api)
 
 [![version badge](https://img.shields.io/badge/Peshehod_Help_Bot-v0.0.1b-blue.svg)](https://t.me/peshehod_help_bot)
@@ -23,7 +23,7 @@
 
 ## Стек
 
-Бот написан на **Python 3.11** с использованием фреймворка **aiogram 3.0.0rc1** (в планах переход на стабильную 3-ю версию фреймворка, когда она появится).
+Бот написан на **Python 3.11** с использованием фреймворка **aiogram 3.2.0**.
 
 Зависимости указаны в файле [`requirements.txt`](requirements.txt).
 
@@ -36,8 +36,8 @@
 ## План по запуску разделов бота
 
 - [x] Вводное слово 2023.06.14
-- [ ] Список всех туров (код написан к 2023.08.04)
-- [ ] ЧАВо (код написан к 2023.08.04)
+- [x] Список всех туров (код написан к 2023.08.04)
+- [x] ЧАВо (код написан к 2023.08.04)
 - [ ] База данных пользователей (для статистики и последующего слияния с ORM)
 - [x] Контакты 2023.08.13
 - [ ] Оставить отзыв
@@ -54,8 +54,8 @@ section     Development
 Начало работы над ботом         :mileston,      2023.04.03, 
 JSON-словари для бота           :done,      a0, 2023.04.05, 2023.05.18
 Вводное слово                   :done,      a1, 2023.05.19, 2023.06.14
-Список всех туров               :active,    a2, 2023.06.15, 60d
-ЧАВо                            :active,    a3, 2023.06.15, 60d
+Список всех туров               :done,    a2, 2023.06.15, 60d
+ЧАВо                            :done,    a3, 2023.06.15, 60d
 Переработать гл. меню           :done,      a5, 2023.08.05, 2d
 Контакты и Справка              :done,      a6, 2023.08.13, 1d
 section     Production
