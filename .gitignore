@@ -133,4 +133,4 @@ dmypy.json
 .vscode.idea/
 .vscode/
 .idea/
-~$*.xlsx.DS_Store
+.DS_Store
