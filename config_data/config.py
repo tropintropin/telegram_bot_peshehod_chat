@@ -6,10 +6,8 @@ from dataclasses import dataclass
 from environs import Env
 
 from aiogram.filters.callback_data import CallbackData
+from aiogram.fsm.storage.redis import Redis, RedisStorage
 
-
-#TODO: Add Redis to config
-# https://stepik.org/lesson/870034/step/4?unit=874212
 
 @dataclass
 class TgBot:
@@ -37,6 +35,11 @@ class Config:
     tg_bot: TgBot
 
 
+@dataclass
+class Storage:
+    storage: RedisStorage
+
+
 def load_config(path: str | None = None) -> Config:
     """
     Load the configuration data from the specified environment file.
@@ -52,6 +55,11 @@ def load_config(path: str | None = None) -> Config:
     env = Env()
     env.read_env(path)
     return Config(tg_bot=TgBot(token=env('BOT_TOKEN')))
+
+
+def load_storage() -> Storage:
+    redis: Redis = Redis(host='localhost')
+    return Storage(storage=Storage.storage(redis=redis))
 
 
 class FAQCallbackFactory(CallbackData, prefix='f'):
