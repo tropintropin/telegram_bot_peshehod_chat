@@ -8,6 +8,9 @@ from environs import Env
 from aiogram.filters.callback_data import CallbackData
 
 
+#TODO: Add Redis to config
+# https://stepik.org/lesson/870034/step/4?unit=874212
+
 @dataclass
 class TgBot:
     """
