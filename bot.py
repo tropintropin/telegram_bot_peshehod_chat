@@ -6,7 +6,7 @@ import logging
 
 from aiogram import Bot, Dispatcher
 
-from config_data.config import Config, load_config
+from config_data.config import Config, load_config, Storage, load_storage
 from handlers import (faq_handlers, other_handlers, tours_handlers,
                         user_handlers)
 from keyboards.main_menu import set_main_menu
@@ -21,9 +21,11 @@ async def main() -> None:
     # Loads the bot configuration from a file
     config: Config = load_config()
 
+    storage: Storage = load_storage()
+
     # Bot and dispatcher initialization
     bot: Bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
-    dp: Dispatcher = Dispatcher()
+    dp: Dispatcher = Dispatcher(storage=storage)
 
     # Connecting handlers
     dp.include_router(user_handlers.router)
