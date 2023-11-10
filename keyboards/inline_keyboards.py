@@ -12,11 +12,12 @@ from services.services import cut_tour_specs_for_keyboard
 
 
 def create_startup_inline_kb() -> InlineKeyboardMarkup :
-    """DOCSTRING"""
+    """DOCSTRING""" #TODO
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = [
         InlineKeyboardButton(text='ЧАВо (частые вопросы и ответы)', callback_data='faq'),
         InlineKeyboardButton(text='Посмотреть список туров', callback_data='tours'),
+        InlineKeyboardButton(text='Подобрать себе тур', callback_data='tour_select'),
         InlineKeyboardButton(text='Справка', callback_data='help'),
         InlineKeyboardButton(text='Контакты', callback_data='contacts')
     ]
@@ -139,6 +140,22 @@ def create_faq_section_item_inline_kb(width: int, user_dict: dict, section: str)
             text=item['question'],
             callback_data=ItemsFAQCallbackFactory(section=section, item=callback).pack()
         ))
+
+    kb_builder.row(*buttons, width=width)
+
+    return kb_builder.as_markup()
+
+
+def create_tour_selection_inline_kb(width: int, user_dict: dict) -> InlineKeyboardMarkup:
+    kb_builder: InlineKeyboardBuilder() = InlineKeyboardBuilder()
+    buttons: list[InlineKeyboardButton] = []
+
+    for callback, question in user_dict.items():
+        if callback != 'question':
+            buttons.append(InlineKeyboardButton(
+                text=question,
+                callback_data=callback
+            ))
 
     kb_builder.row(*buttons, width=width)
 
