@@ -4,7 +4,8 @@
 from asyncio import sleep
 
 from aiogram import F, Router
-from aiogram.filters import Command, CommandStart
+from aiogram.filters import Command, CommandStart, StateFilter
+from aiogram.fsm.state import default_state
 from aiogram.types import CallbackQuery, Message
 
 from keyboards.inline_keyboards import create_startup_inline_kb
@@ -14,7 +15,7 @@ from lexicon.lexicon import LEXICON_RU
 router: Router = Router()
 
 
-@router.message(CommandStart())
+@router.message(CommandStart(), StateFilter(default_state))
 async def process_start_command(message: Message):
     """
     Handle the command "/start".
@@ -30,11 +31,34 @@ async def process_start_command(message: Message):
     await message.answer(f'{instruction}')
     await sleep(2)
     # TODO: Change the message & docstring for this answer when production:
+    # TODO: Add tour_selection button
     startup_keyboard = create_startup_inline_kb()
     await message.answer(
         text='<strong>Выберите интересующий вас раздел:</strong>',
         reply_markup=startup_keyboard
     )
+
+
+@router.message(Command(commands='cancel'), StateFilter(default_state))
+async def process_cancel_command(message: Message):
+    await message.answer(text='Все изменения отменены. Вы в разделе помощи.')
+    await message.answer(text=LEXICON_RU['/help'])
+    startup_keyboard = create_startup_inline_kb()
+    await message.answer(
+        text='<strong>Выберите интересующий вас раздел:</strong>',
+        reply_markup=startup_keyboard
+    )
+
+@router.callback_query(F.data == 'cancel', StateFilter(default_state))
+async def process_cancel_press(callback: CallbackQuery):
+    if callback.message:
+        await callback.message.answer(text='Все изменения отменены. Вы в разделе помощи.')
+        await callback.message.answer(text=LEXICON_RU['/help'])
+        startup_keyboard = create_startup_inline_kb()
+        await callback.message.answer(
+            text='<strong>Выберите интересующий вас раздел:</strong>',
+            reply_markup=startup_keyboard
+        )
 
 
 @router.message(Command(commands='help'))
@@ -57,7 +81,7 @@ async def process_help_command(message: Message):
 
 @router.callback_query(F.data == 'help')
 async def process_help_press(callback: CallbackQuery):
-    """DOCSTRING"""
+    """DOCSTRING""" #TODO
     if callback.message:
         await callback.message.answer(text=LEXICON_RU['/help'])
         startup_keyboard = create_startup_inline_kb()
