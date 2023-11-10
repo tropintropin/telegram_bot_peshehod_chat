@@ -5,12 +5,13 @@ from aiogram import F, Router
 from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import default_state
-from aiogram.fsm.storage.redis import Redis, RedisStorage
+from aiogram.fsm.storage.redis import RedisStorage
 from aiogram.types import CallbackQuery, Message
+from redis.asyncio.client import Redis
 
+from keyboards.inline_keyboards import create_tour_selection_inline_kb
 from services.fsm import FSMTourSelection
 from services.services import get_tour_selection
-from keyboards.inline_keyboards import create_tour_selection_inline_kb
 
 router: Router = Router()
 
