@@ -41,7 +41,7 @@ async def process_start_command(message: Message):
 
 @router.message(Command(commands='cancel'), StateFilter(default_state))
 async def process_cancel_command(message: Message):
-    await message.answer(text='Все изменения отменены. Вы в разделе помощи.')
+    await message.answer(text=LEXICON_RU['/cancel'])
     await message.answer(text=LEXICON_RU['/help'])
     startup_keyboard = create_startup_inline_kb()
     await message.answer(
@@ -52,7 +52,7 @@ async def process_cancel_command(message: Message):
 @router.callback_query(F.data == 'cancel', StateFilter(default_state))
 async def process_cancel_press(callback: CallbackQuery):
     if callback.message:
-        await callback.message.answer(text='Все изменения отменены. Вы в разделе помощи.')
+        await callback.message.answer(text=LEXICON_RU['/cancel'])
         await callback.message.answer(text=LEXICON_RU['/help'])
         startup_keyboard = create_startup_inline_kb()
         await callback.message.answer(
