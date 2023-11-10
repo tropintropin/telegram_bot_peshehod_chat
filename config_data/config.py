@@ -73,7 +73,7 @@ def load_config(path: str | None = None) -> Config:
     redis: Redis = Redis(host="localhost", db=0)
     return Config(
         tg_bot=TgBot(token=env("BOT_TOKEN")),
-        storage=Storage(redis_storage=RedisStorage(redis=redis)),
+        storage=Storage(redis_storage=RedisStorage(redis=redis))
     )
 
 
