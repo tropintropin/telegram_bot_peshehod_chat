@@ -16,6 +16,7 @@ router: Router = Router()
 
 
 @router.message(CommandStart(), StateFilter(default_state))
+@router.message(CommandStart(), ~StateFilter(default_state))
 async def process_start_command(message: Message):
     """
     Handle the command "/start".
