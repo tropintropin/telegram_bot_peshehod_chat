@@ -5,6 +5,7 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher
+from aiogram.enums import ParseMode
 
 from config_data.config import Config, load_config
 from handlers import (faq_handlers, other_handlers,
@@ -23,7 +24,7 @@ async def main() -> None:
     config: Config = load_config()
 
     # Bot and dispatcher initialization
-    bot: Bot = Bot(token=config.tg_bot.token, parse_mode="HTML")
+    bot: Bot = Bot(token=config.tg_bot.token, parse_mode=ParseMode.HTML)
     dp: Dispatcher = Dispatcher(storage=config.storage.redis_storage)
 
     # Connecting handlers
