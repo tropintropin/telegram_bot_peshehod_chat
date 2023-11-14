@@ -57,3 +57,63 @@ async def process_is_group_sent(callback: CallbackQuery, state: FSMContext):
             text=questions["have_children"]["question"], reply_markup=is_group_keyboard
         )
         await state.set_state(FSMTourSelection.have_children)
+
+
+@router.callback_query(StateFilter(FSMTourSelection.have_children), F.data == 'kids')
+async def process_have_children_sent(callback: CallbackQuery, state: FSMContext):
+    if callback.message:
+        await state.update_data(have_children=callback.data)
+
+        questions = get_tour_selection()
+        is_group_keyboard = create_tour_selection_inline_kb(
+            width=2, user_dict=questions["kids"]
+        )
+        await callback.message.answer(
+            text=questions["kids"]["question"], reply_markup=is_group_keyboard
+        )
+        await state.set_state(FSMTourSelection.kids)
+
+
+@router.callback_query(StateFilter(FSMTourSelection.have_children), F.data == 'adults')
+async def process_not_have_children_sent(callback: CallbackQuery, state: FSMContext):
+    if callback.message:
+        await state.update_data(have_children=callback.data)
+
+        questions = get_tour_selection()
+        is_group_keyboard = create_tour_selection_inline_kb(
+            width=2, user_dict=questions["visit"]
+        )
+        await callback.message.answer(
+            text=questions["visit"]["question"], reply_markup=is_group_keyboard
+        )
+        await state.set_state(FSMTourSelection.visit)
+
+
+@router.callback_query(StateFilter(FSMTourSelection.kids))
+async def process_kids_sent(callback: CallbackQuery, state: FSMContext):
+    if callback.message:
+        await state.update_data(kids=callback.data)
+
+        questions = get_tour_selection()
+        is_group_keyboard = create_tour_selection_inline_kb(
+            width=2, user_dict=questions["visit"]
+        )
+        await callback.message.answer(
+            text=questions["visit"]["question"], reply_markup=is_group_keyboard
+        )
+        await state.set_state(FSMTourSelection.visit)
+
+
+@router.callback_query(StateFilter(FSMTourSelection.visit))
+async def process_visit_sent(callback: CallbackQuery, state: FSMContext):
+    if callback.message:
+        await state.update_data(visit=callback.data)
+
+        user_answers = {}
+        user_answers[callback.from_user.id] = await state.get_data()
+
+        await state.clear()
+
+        #TODO: Make function for a resulting tours list keyboard + message!
+        await callback.message.answer(text="Здесь будет список туров, подобранных исходя из ответов на анкету 👌\nА пока, вот что вы ответили:")
+        await callback.message.answer(text='\n'.join([f'{k}: {v}' for k, v in user_answers[callback.from_user.id].items()]))
