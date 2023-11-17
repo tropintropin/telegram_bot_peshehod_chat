@@ -6,7 +6,26 @@
                     "kids": {
                         "toddler": {
                             "visit": {
-                                "first": [],
+                                "first": [
+                                    "vr",
+                                    "liteiny",
+                                    "myths",
+                                    "liter",
+                                    "informal",
+                                    "kamenny",
+                                    "vasil",
+                                    "sightseeng_gr",
+                                    "blockade",
+                                    "sightseeng_kid",
+                                    "kolomna",
+                                    "petrogr",
+                                    "fortress_priv",
+                                    "hermit_kid",
+                                    "rus_mus_kid",
+                                    "sightseeng_priv",
+                                    "fortr_kid_q",
+                                    "secrets_kid_q"
+                                ],
                                 "lot": [],
                                 "local": []
                             }
