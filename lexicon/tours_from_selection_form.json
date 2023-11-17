@@ -1,0 +1,86 @@
+{
+    "tours": {
+        "is_group": {
+            "group": {
+                "have_children": {
+                    "kids": {
+                        "toddler": {
+                            "visit": {
+                                "first": [],
+                                "lot": [],
+                                "local": []
+                            }
+                        },
+                        "preschool": {
+                            "visit": {
+                                "first": [],
+                                "lot": [],
+                                "local": []
+                            }
+                        },
+                        "gradeschooler": {
+                            "visit": {
+                                "first": [],
+                                "lot": [],
+                                "local": []
+                            }
+                        },
+                        "teen": {
+                            "visit": {
+                                "first": [],
+                                "lot": [],
+                                "local": []
+                            }
+                        }
+                    },
+                    "adults": {
+                        "visit": {
+                            "first": [],
+                            "lot": [],
+                            "local": []
+                        }
+                    }
+                }
+            },
+            "individual": {
+                "kids": {
+                    "toddler": {
+                        "visit": {
+                            "first": [],
+                            "lot": [],
+                            "local": []
+                        }
+                    },
+                    "preschool": {
+                        "visit": {
+                            "first": [],
+                            "lot": [],
+                            "local": []
+                        }
+                    },
+                    "gradeschooler": {
+                        "visit": {
+                            "first": [],
+                            "lot": [],
+                            "local": []
+                        }
+                    },
+                    "teen": {
+                        "visit": {
+                            "first": [],
+                            "lot": [],
+                            "local": []
+                        }
+                    }
+                },
+                "adults": {
+                    "visit": {
+                        "first": [],
+                        "lot": [],
+                        "local": []
+                    }
+                }
+            }
+        }
+    }
+}
