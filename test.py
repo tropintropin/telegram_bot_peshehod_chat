@@ -11,15 +11,26 @@ def get_tour_selection_form_results():
 
 # print(get_tour_selection_form_results()["is_group"])
 
-results = list(get_tour_selection_form_results())
+results = get_tour_selection_form_results()
 
-def iterate_results(dict: dict):
+# def iterate_results(dict: dict):
+#     for k, v in dict.items():
+#         if type(v) is dict:
+#             print(v)
+#             yield from iterate_results(v)
+#         elif type(v) is list and v is not None:
+#             print(v)
+#             yield v
+#         else:
+#             yield v
+
+# print(iterate_results(results))
+
+def iterate(dict: dict):
     for k, v in dict.items():
-        if isinstance(v, dict):
-            yield from iterate_results(v)
-        elif isinstance(v, list):
-            yield from v
+        if type(v) is dict:
+            yield iterate(v)
         else:
             yield v
 
-print(iterate_results(results))
+print(list(iterate(results)))
