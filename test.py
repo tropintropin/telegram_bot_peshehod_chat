@@ -1,36 +1,29 @@
 import json
 from pathlib import Path
+from typing import Any, List
 
 
-def get_tour_selection_form_results():
+def get_tour_selection_form_results() -> dict:
     file: Path = Path("lexicon/tours_from_selection_form.json")
     with file.open("r", encoding="utf-8") as f:
-        results = json.load(f)["tours"]
+        results: dict = json.load(f)["tours"]
         return results
 
 
-# print(get_tour_selection_form_results()["is_group"])
-
 results = get_tour_selection_form_results()
 
-# def iterate_results(dict: dict):
-#     for k, v in dict.items():
-#         if type(v) is dict:
-#             print(v)
-#             yield from iterate_results(v)
-#         elif type(v) is list and v is not None:
-#             print(v)
-#             yield v
-#         else:
-#             yield v
 
-# print(iterate_results(results))
+def get_non_empty_lists(data: Any) -> List[list]:
+    """Made with GPT-3.5"""
+    if isinstance(data, list):
+        # Если переданный объект - список, возвращаем его, если он не пуст
+        return [data] if any(data) else []
+    elif isinstance(data, dict):
+        # Если переданный объект - словарь, рекурсивно вызываем эту же функцию для значений
+        return [item for value in data.values() for item in get_non_empty_lists(value)]
+    else:
+        # Возвращаем пустой список для прочих типов данных
+        return []
 
-def iterate(dict: dict):
-    for k, v in dict.items():
-        if type(v) is dict:
-            yield iterate(v)
-        else:
-            yield v
 
-print(list(iterate(results)))
+print(get_non_empty_lists(results))
