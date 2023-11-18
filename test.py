@@ -1,12 +1,12 @@
 import json
 from pathlib import Path
-from typing import Any, List
+from typing import Any, Dict, List, Union
 
 
-def get_tour_selection_form_results() -> dict:
+def get_tour_selection_form_results() -> Dict[str, Union[str, Dict, List[str]]]:
     file: Path = Path("lexicon/tours_from_selection_form.json")
     with file.open("r", encoding="utf-8") as f:
-        results: dict = json.load(f)["tours"]
+        results = json.load(f)["tours"]
         return results
 
 
