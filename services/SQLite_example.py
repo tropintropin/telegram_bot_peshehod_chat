@@ -1,6 +1,6 @@
 import sqlite3
 from sqlite3 import Error
-from typing import Optional
+from typing import List, Optional
 
 
 def create_connection(path: str) -> Optional[sqlite3.Connection]:
@@ -34,6 +34,17 @@ def execute_query(connection: sqlite3.Connection, query: str) -> None:
         print(f"The error '{e}' occurred")
 
 
+def execute_read_query(connection: sqlite3.Connection, query: str) -> List[str]:
+    cursor = connection.cursor()
+    result = None
+    try:
+        cursor.execute(query)
+        result = cursor.fetchall()
+        return result
+    except Error as e:
+        print(f"The error '{e}' occurred")
+
+
 def open_query_file(path: str) -> str:
     """
     Open a file with SQL query and return the query as a string.
@@ -51,3 +62,9 @@ create_tours = open_query_file("services/create_tours.sql")
 connection = create_connection("tours.sqlite")
 execute_query(connection=connection, query=create_tours_table)
 execute_query(connection=connection, query=create_tours)
+
+select_tours = f"SELECT * FROM tours"
+tours = execute_read_query(connection=connection, query=select_tours)
+
+for tour in tours:
+    print(tour)
