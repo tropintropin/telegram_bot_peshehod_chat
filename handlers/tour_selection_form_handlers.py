@@ -14,6 +14,7 @@ from keyboards.inline_keyboards import (create_startup_inline_kb,
 from lexicon.lexicon import LEXICON_RU
 from services.fsm import FSMTourSelection
 from services.services import get_tour_selection
+from services.SQLite_example import get_tours_list
 
 router: Router = Router()
 
@@ -78,6 +79,7 @@ async def process_have_children_sent(callback: CallbackQuery, state: FSMContext)
 async def process_not_have_children_sent(callback: CallbackQuery, state: FSMContext):
     if callback.message:
         await state.update_data(have_children=callback.data)
+        await state.update_data(kids=None)
 
         questions = get_tour_selection()
         is_group_keyboard = create_tour_selection_inline_kb(
@@ -114,6 +116,10 @@ async def process_visit_sent(callback: CallbackQuery, state: FSMContext):
 
         await state.clear()
 
+        answers = get_tours_list(user_answers[callback.from_user.id])
+
         #TODO: Make function for a resulting tours list keyboard + message!
         await callback.message.answer(text="Здесь будет список туров, подобранных исходя из ответов на анкету 👌\nА пока, вот что вы ответили:")
         await callback.message.answer(text='\n'.join([f'{k}: {v}' for k, v in user_answers[callback.from_user.id].items()]))
+        print(user_answers[callback.from_user.id])
+        print(answers)
