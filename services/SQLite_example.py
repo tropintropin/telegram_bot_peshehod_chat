@@ -1,6 +1,6 @@
 import sqlite3
 from sqlite3 import Error
-from typing import List, Optional
+from typing import Dict, List, Optional
 
 
 def create_connection(path: str) -> Optional[sqlite3.Connection]:
@@ -17,6 +17,17 @@ def create_connection(path: str) -> Optional[sqlite3.Connection]:
         print(f"The error '{e}' occurred")
 
     return connection
+
+
+def open_query_file(path: str) -> str:
+    """
+    Open a file with SQL query and return the query as a string.
+    :param path: Path to the file with SQL query
+    :return: SQL query as a string
+    """
+    with open(path, "r") as f:
+        query = f.read().strip()
+        return query
 
 
 def execute_query(connection: sqlite3.Connection, query: str) -> None:
@@ -45,21 +56,27 @@ def execute_read_query(connection: sqlite3.Connection, query: str) -> List[str]:
         print(f"The error '{e}' occurred")
 
 
-def open_query_file(path: str) -> str:
-    """
-    Open a file with SQL query and return the query as a string.
-    :param path: Path to the file with SQL query
-    :return: SQL query as a string
-    """
-    with open(path, "r") as f:
-        query = f.read().strip()
-        return query
+def get_tours_list(user_answers: Dict[str, str]) -> List[str]:
+    query = f"""
+SELECT DISTINCT tours_list
+FROM            tours
+WHERE
+        is_group        = "{user_answers['is_group']}"
+    AND have_children   = "{user_answers['have_children']}"
+    AND (kids IS NULL OR kids = "{user_answers['kids']}")
+    AND visit           = "{user_answers['visit']}"
+"""
+    tours_list = execute_read_query(connection=connection, query=query)
+    tours_list = tours_list[0][0]
+    return tours_list
 
 
+delete_tours_table_values = open_query_file("services/delete_tours_table.sql")
 create_tours_table = open_query_file("services/create_tours_table.sql")
 create_tours = open_query_file("services/create_tours.sql")
 
 connection = create_connection("tours.sqlite")
+execute_query(connection=connection, query=delete_tours_table_values)
 execute_query(connection=connection, query=create_tours_table)
 execute_query(connection=connection, query=create_tours)
 
