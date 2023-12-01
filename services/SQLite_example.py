@@ -57,17 +57,27 @@ def execute_read_query(connection: sqlite3.Connection, query: str) -> List[str]:
 
 
 def get_tours_list(user_answers: Dict[str, str]) -> List[str]:
-    query = f"""
-SELECT DISTINCT tours_list
-FROM            tours
-WHERE
-        is_group        = "{user_answers['is_group']}"
-    AND have_children   = "{user_answers['have_children']}"
-    AND (kids IS NULL OR kids = "{user_answers['kids']}")
-    AND visit           = "{user_answers['visit']}"
+    query = """
+    SELECT DISTINCT tours_list
+    FROM tours
+    WHERE
+        is_group = ?
+        AND have_children = ?
+        AND (kids IS NULL OR kids = ?)
+        AND visit = ?
 """
-    tours_list = execute_read_query(connection=connection, query=query)
-    tours_list = tours_list[0][0]
+    cursor = connection.cursor()
+    cursor.execute(
+        query,
+        (
+            user_answers["is_group"],
+            user_answers["have_children"],
+            user_answers["kids"],
+            user_answers["visit"],
+        ),
+    )
+    tours_list = cursor.fetchone()[0]
+
     return tours_list
 
 
