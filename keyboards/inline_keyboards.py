@@ -75,7 +75,7 @@ def create_tours_list_inline_kb(width: int, user_dict: dict[str, dict[str, str]]
         ))
 
     button_tours = InlineKeyboardButton(
-        text='К списку всех туров',
+        text='⬇ К списку всех туров',
         callback_data='tours'
     )
 
