@@ -5,6 +5,7 @@ and processing information from handlers and keyboards.
 import copy
 import json
 from pathlib import Path
+from typing import List
 
 
 def get_tour_selection():
@@ -44,6 +45,16 @@ def get_tours_list() -> dict[str, dict[str, str]]:
     with tours_list_file.open("r", encoding="utf-8") as f:
         tours: dict[str, dict[str, str]] = json.load(f)["tours"]
     return tours
+
+
+def get_custom_list_of_tours(tours_list: List[str]):
+    all_tours: dict = get_tours_list()
+    custom_tours: dict = {}
+
+    for key, value in all_tours.items():
+        if key in tours_list:
+            custom_tours[key] = value
+    return custom_tours
 
 
 def get_group_tours_list():
