@@ -6,24 +6,18 @@ from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import default_state
 from aiogram.fsm.storage.redis import RedisStorage
-from aiogram.types import (
-    CallbackQuery,
-    InlineKeyboardButton,
-    InlineKeyboardMarkup,
-    Message,
-)
+from aiogram.types import (CallbackQuery, InlineKeyboardButton,
+                            InlineKeyboardMarkup, Message)
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from redis.asyncio.client import Redis
 
-from keyboards.inline_keyboards import (
-    create_startup_inline_kb,
-    create_tour_selection_inline_kb,
-    create_tours_list_inline_kb,
-)
+from keyboards.inline_keyboards import (create_startup_inline_kb,
+                                        create_tour_selection_inline_kb,
+                                        create_tours_list_inline_kb)
 from lexicon.lexicon import LEXICON_RU
 from services.fsm import FSMTourSelection
 from services.services import get_custom_list_of_tours, get_tour_selection
-from services.SQLite_example import get_tours_list
+from services.sqlite_database_handler import get_tours_list
 
 router: Router = Router()
 
