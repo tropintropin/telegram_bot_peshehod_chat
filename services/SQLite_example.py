@@ -54,6 +54,7 @@ def execute_read_query(connection: sqlite3.Connection, query: str) -> List[str]:
         return result
     except Error as e:
         print(f"The error '{e}' occurred")
+        return []
 
 
 def get_tours_list(user_answers: Dict[str, str]) -> List[str]:
@@ -66,19 +67,21 @@ def get_tours_list(user_answers: Dict[str, str]) -> List[str]:
         AND (kids IS NULL OR kids = ?)
         AND visit = ?
 """
-    cursor = connection.cursor()
-    cursor.execute(
-        query,
-        (
-            user_answers["is_group"],
-            user_answers["have_children"],
-            user_answers["kids"],
-            user_answers["visit"],
-        ),
-    )
-    tours_list = cursor.fetchone()[0]
+    if connection is not None:
+        cursor = connection.cursor()
+        cursor.execute(
+            query,
+            (
+                user_answers["is_group"],
+                user_answers["have_children"],
+                user_answers["kids"],
+                user_answers["visit"],
+            ),
+        )
+        tours_list = cursor.fetchone()[0]
 
-    return tours_list
+        return tours_list
+    return []  # If connection is None
 
 
 delete_tours_table_values = open_query_file("services/delete_tours_table.sql")
@@ -86,12 +89,13 @@ create_tours_table = open_query_file("services/create_tours_table.sql")
 create_tours = open_query_file("services/create_tours.sql")
 
 connection = create_connection("tours.sqlite")
-execute_query(connection=connection, query=delete_tours_table_values)
-execute_query(connection=connection, query=create_tours_table)
-execute_query(connection=connection, query=create_tours)
+if connection is not None:
+    execute_query(connection=connection, query=delete_tours_table_values)
+    execute_query(connection=connection, query=create_tours_table)
+    execute_query(connection=connection, query=create_tours)
 
-select_tours = f"SELECT * FROM tours"
-tours = execute_read_query(connection=connection, query=select_tours)
+    select_tours = f"SELECT * FROM tours"
+    tours = execute_read_query(connection=connection, query=select_tours)
 
-for tour in tours:
-    print(tour)
+    for tour in tours:
+        print(tour)
