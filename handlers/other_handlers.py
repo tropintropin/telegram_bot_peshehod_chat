@@ -1,13 +1,14 @@
 from aiogram import Router
+from aiogram.filters import StateFilter
+from aiogram.fsm.state import default_state
 from aiogram.types import Message
 
 from lexicon.lexicon import LEXICON_RU
 
-
 router: Router = Router()
 
 
-@router.message()
+@router.message(StateFilter(default_state))
 async def send_echo(message: Message):
     """
     Handle the received message and send a copy back to the sender.

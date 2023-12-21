@@ -7,21 +7,29 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from config_data.config import (FAQCallbackFactory, ItemsFAQCallbackFactory,
                                 ToursCallbackFactory,
                                 TourSpecItemCallbackFactory)
-from lexicon.lexicon import LEXICON_RU
+from lexicon.lexicon import LEXICON_RU, LEXICON_COMMANDS
 from services.services import cut_tour_specs_for_keyboard
 
 
-def create_startup_inline_kb() -> InlineKeyboardMarkup :
-    """DOCSTRING"""
+def create_startup_inline_kb() -> InlineKeyboardMarkup:
+    """DOCSTRING""" #TODO
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = [
         InlineKeyboardButton(text='ЧАВо (частые вопросы и ответы)', callback_data='faq'),
         InlineKeyboardButton(text='Посмотреть список туров', callback_data='tours'),
+        InlineKeyboardButton(text='Подобрать себе тур', callback_data='tour_select'),
         InlineKeyboardButton(text='Справка', callback_data='help'),
         InlineKeyboardButton(text='Контакты', callback_data='contacts')
     ]
     kb_builder.row(*buttons, width=1)
     return kb_builder.as_markup()
+
+
+def create_cancel_button() -> InlineKeyboardButton:
+    cancel_button: InlineKeyboardButton = InlineKeyboardButton(
+        text=LEXICON_COMMANDS['/cancel'],
+        callback_data='cancel')
+    return cancel_button
 
 
 def create_tours_inline_kb() -> InlineKeyboardMarkup:
@@ -67,7 +75,7 @@ def create_tours_list_inline_kb(width: int, user_dict: dict[str, dict[str, str]]
         ))
 
     button_tours = InlineKeyboardButton(
-        text='К списку всех туров',
+        text='⬇ К списку всех туров',
         callback_data='tours'
     )
 
@@ -141,5 +149,22 @@ def create_faq_section_item_inline_kb(width: int, user_dict: dict, section: str)
         ))
 
     kb_builder.row(*buttons, width=width)
+
+    return kb_builder.as_markup()
+
+
+def create_tour_selection_inline_kb(width: int, user_dict: dict) -> InlineKeyboardMarkup:
+    kb_builder: InlineKeyboardBuilder() = InlineKeyboardBuilder()
+    buttons: list[InlineKeyboardButton] = []
+
+    for callback, question in user_dict.items():
+        if callback != 'question':
+            buttons.append(InlineKeyboardButton(
+                text=question,
+                callback_data=callback
+            ))
+
+    kb_builder.row(*buttons, width=width)
+    kb_builder.row(create_cancel_button(), width=1)
 
     return kb_builder.as_markup()

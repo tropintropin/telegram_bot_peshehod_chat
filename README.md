@@ -1,7 +1,7 @@
 # Бот-помощник в Telegram для компании «Пешеход Тур»
 
 [![wakatime](https://wakatime.com/badge/github/tropintropin/telegram_bot_peshehod_chat.svg)](https://wakatime.com/badge/github/tropintropin/telegram_bot_peshehod_chat)
-[![version badge](https://img.shields.io/badge/Python-3.10_|_3.11-blue.svg)](https://www.python.org/)
+[![version badge](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
 [![version badge](https://img.shields.io/badge/aiogram-3.2.0-blue.svg)](https://docs.aiogram.dev/en/dev-3.x/)
 [![Telegram Bot API](https://img.shields.io/badge/dynamic/json?color=blue&logo=telegram&label=Telegram%20Bot%20API&query=%24.api.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Faiogram%2Faiogram%2Fdev-3.x%2F.butcher%2Fschema%2Fschema.json&style=flat-square)](https://core.telegram.org/bots/api)
 
@@ -25,9 +25,11 @@
 
 Бот написан на **Python 3.11** с использованием фреймворка **aiogram 3.2.0**.
 
+Информация о пользователях и данные для FSM хранятся и обрабатываются с помощью **Redis** и **SQLite**.
+
 Зависимости указаны в файле [`requirements.txt`](requirements.txt).
 
-Документация (docstrings) для классов, функций и методов написана при неоценимой поддержке [GPT-3.5](https://chat.openai.com).
+Документация для модулей, классов, функций и методов, аннотации типов написаны при неоценимой поддержке [GPT-3.5](https://chat.openai.com) и [Phind Model](https://www.phind.com).
 
 Токен бота хранится в файле `.env`. В корне репозитория есть файл [`.env.example`](.env.example). Переименуйте его в `.env`
 и вставьте внутрь токен от своего бота, полученный от [`@BotFather`](https://t.me/botfather).
@@ -41,7 +43,7 @@
 - [ ] База данных пользователей (для статистики и последующего слияния с ORM)
 - [x] Контакты 2023.08.13
 - [ ] Оставить отзыв
-- [ ] Анкета (подбери себе тур)
+- [x] Анкета выбора тура (код написан к 2023.12.01)
 - [ ] Викторина
 
 ```mermaid
@@ -58,9 +60,11 @@ JSON-словари для бота           :done,      a0, 2023.04.05, 2023.0
 ЧАВо                            :done,    a3, 2023.06.15, 60d
 Переработать гл. меню           :done,      a5, 2023.08.05, 2d
 Контакты и Справка              :done,      a6, 2023.08.13, 1d
+Анкета выбора тура              :active,    a7, 2023.11.03, 2023.12.01
+Ревизия данных (с апреля)       :active,    a8, 2023.12.02, 7d
 section     Production
 Тестовый запуск бота (v0.0.1b)  :mileston,      2023.06.14,
-Бот-заглушка                    :active,    b0, 2023.06.14, 60d
+Бот-заглушка                    :active,    b0, 2023.06.14, 2023.12.31
 ```
 
 ## Рабочая схема разделов бота

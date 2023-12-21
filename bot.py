@@ -5,9 +5,11 @@ import asyncio
 import logging
 
 from aiogram import Bot, Dispatcher
+from aiogram.enums import ParseMode
 
 from config_data.config import Config, load_config
-from handlers import (faq_handlers, other_handlers, tours_handlers,
+from handlers import (faq_handlers, other_handlers,
+                        tour_selection_form_handlers, tours_handlers,
                         user_handlers)
 from keyboards.main_menu import set_main_menu
 
@@ -16,17 +18,18 @@ async def main() -> None:
     file_log = logging.FileHandler("bot.log")
     console_out = logging.StreamHandler()
     logging.basicConfig(handlers=(file_log, console_out), level=logging.INFO)
-    logging.info('Starting bot...')
+    logging.info("Starting bot...")
 
     # Loads the bot configuration from a file
     config: Config = load_config()
 
     # Bot and dispatcher initialization
-    bot: Bot = Bot(token=config.tg_bot.token, parse_mode='HTML')
-    dp: Dispatcher = Dispatcher()
+    bot: Bot = Bot(token=config.tg_bot.token, parse_mode=ParseMode.HTML)
+    dp: Dispatcher = Dispatcher(storage=config.storage.redis_storage)
 
     # Connecting handlers
     dp.include_router(user_handlers.router)
+    dp.include_router(tour_selection_form_handlers.router)
     dp.include_router(faq_handlers.router)
     dp.include_router(tours_handlers.router)
     dp.include_router(other_handlers.router)
@@ -40,5 +43,5 @@ async def main() -> None:
     await dp.start_polling(bot)
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     asyncio.run(main())
