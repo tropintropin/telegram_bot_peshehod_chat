@@ -102,13 +102,13 @@ VALUES (
         'adults',
         NULL,
         'first',
-        '["hermit_kid", "rus_mus_kid", "sightseeng_priv", "fortr_kid_q"]'
+        '["sightseeng_priv", "myths", "liter", "vasil", "blockade", "petrogr"]'
     ),
     (
         'individual',
         'adults',
         NULL,
         'local',
-        '["hermit_kid", "rus_mus_kid", "sightseeng_priv", "fortr_kid_q"]'
+        '["sightseeng_priv", "liteiny", "liter", "informal", "kamenny", "vasil", "kolomna", "petrogr"]'
     )
 ;
