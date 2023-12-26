@@ -35,8 +35,23 @@ async def process_cancel_press(callback: CallbackQuery, state: FSMContext):
         await state.clear()
 
 
-@router.callback_query(F.data == "tour_select")
-async def process_tour_select_press(callback: CallbackQuery, state: FSMContext):
+@router.message(Command(commands='choose_tour'))
+async def process_choose_tour_command(message: Message, state: FSMContext):
+    """
+    Handle the command "/choose_tour".
+    """
+    questions = get_tour_selection()
+    is_group_keyboard = create_tour_selection_inline_kb(
+        width=2, user_dict=questions["is_group"]
+    )
+    await message.answer(
+        text=questions["is_group"]["question"], reply_markup=is_group_keyboard
+    )
+    await state.set_state(FSMTourSelection.is_group)
+
+
+@router.callback_query(F.data == "choose_tour")
+async def process_choose_tour_press(callback: CallbackQuery, state: FSMContext):
     if callback.message:
         questions = get_tour_selection()
         is_group_keyboard = create_tour_selection_inline_kb(

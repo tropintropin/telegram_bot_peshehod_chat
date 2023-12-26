@@ -15,11 +15,11 @@ def create_startup_inline_kb() -> InlineKeyboardMarkup:
     """DOCSTRING""" #TODO
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = [
-        InlineKeyboardButton(text='ЧАВо (частые вопросы и ответы)', callback_data='faq'),
-        InlineKeyboardButton(text='Посмотреть список туров', callback_data='tours'),
-        InlineKeyboardButton(text='Подобрать себе тур', callback_data='tour_select'),
-        InlineKeyboardButton(text='Справка', callback_data='help'),
-        InlineKeyboardButton(text='Контакты', callback_data='contacts')
+        InlineKeyboardButton(text='❓ Частые вопросы и ответы', callback_data='faq'),
+        InlineKeyboardButton(text='📃 Список всех туров', callback_data='tours'),
+        InlineKeyboardButton(text='🎲 Подобрать себе тур', callback_data='choose_tour'),
+        InlineKeyboardButton(text='🆘 Справка', callback_data='help'),
+        InlineKeyboardButton(text='☎ Контакты', callback_data='contacts')
     ]
     kb_builder.row(*buttons, width=1)
     return kb_builder.as_markup()
@@ -44,8 +44,8 @@ def create_tours_inline_kb() -> InlineKeyboardMarkup:
     """
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = [
-        InlineKeyboardButton(text='Групповые туры', callback_data='group_tours'),
-        InlineKeyboardButton(text='Индивидуальные туры', callback_data='private_tours')
+        InlineKeyboardButton(text='👨‍👩‍👦 Групповые', callback_data='group_tours'),
+        InlineKeyboardButton(text='💃 Индивидуальные', callback_data='private_tours')
     ]
     kb_builder.row(*buttons, width=2)
     return kb_builder.as_markup()
@@ -113,7 +113,7 @@ def create_tour_specs_inline_kb(width: int, user_dict: dict[str, str | dict], to
         ))
 
     button_tours = InlineKeyboardButton(
-        text='К списку всех туров',
+        text='⬇ К списку всех туров',
         callback_data='tours'
     )
 
