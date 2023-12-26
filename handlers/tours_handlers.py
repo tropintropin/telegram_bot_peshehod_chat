@@ -14,7 +14,6 @@ from lexicon.lexicon import LEXICON_RU
 from services.services import (get_group_tours_list, get_private_tours_list,
                                 get_tour_specs, get_tours_list)
 
-
 router: Router = Router()
 
 
@@ -39,7 +38,7 @@ async def process_tour_spec_item_press(callback: CallbackQuery,
 
     if callback.message:
         await callback.message.answer(text=fr'<strong>{callback_data.item}</strong>')
-        await callback.message.answer(text=spec[callback_data.item])
+        await callback.message.answer(text=spec[callback_data.item], parse_mode="HTML")
         await callback.message.answer(
             text=r'<strong>Другие вопросы:</strong>',
             reply_markup=tour_specs_keyboard
