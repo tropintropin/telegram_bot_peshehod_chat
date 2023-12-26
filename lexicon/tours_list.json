@@ -11,7 +11,7 @@
             "Продолжительность": "2 часа",
             "Где закончим?": "На ул. Чайковского",
             "Сколько стоит?": "800₽ для взрослых\n500₽ для детей от 7 до 18 лет",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/zakat-imperii-ekskursiya-po-liteinomu-okrugu-peterburga'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/zakat-imperii-ekskursiya-po-liteinomu-okrugu-peterburga\">сайте</a>."
         },
         "myths": {
             "is_group_tour": true,
@@ -24,7 +24,7 @@
             "Продолжительность": "2 часа",
             "Где закончим?": "Новая Голландия/площадь Труда (гид сориентирует вас по транспорту)",
             "Сколько стоит?": "800₽ для взрослых\n500₽ для детей до 12 лет",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/obzornaya-ekskursiya-ot-mifov-k-istorii'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/obzornaya-ekskursiya-ot-mifov-k-istorii\">сайте</a>."
         },
         "liter": {
             "is_group_tour": true,
@@ -37,7 +37,7 @@
             "Продолжительность": "2 часа",
             "Где закончим?": "На Сенной площади (ст.м. «Сенная Площадь», «Спасская» и «Садовая»)",
             "Сколько стоит?": "800₽ для взрослых\n500₽ для детей до 18 лет",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/literaturny-tour-saint-petersburg'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/literaturny-tour-saint-petersburg\">сайте</a>."
         },
         "informal": {
             "is_group_tour": true,
@@ -50,7 +50,7 @@
             "Продолжительность": "2 часа",
             "Где закончим?": "На ул. Рубинштейна, 23",
             "Сколько стоит?": "800₽ для взрослых\n500₽ для детей до 18 лет",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/neformalny-peterburg'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/neformalny-peterburg\">сайте</a>."
         },
         "kamenny": {
             "is_group_tour": true,
@@ -63,7 +63,7 @@
             "Продолжительность": "2 часа",
             "Где закончим?": "На набережной Малой Невки",
             "Сколько стоит?": "800₽ для взрослых\n500₽ для детей до 12 лет",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/kamennyi-ostrov-dobro-pozhalovat-izbrannym-ili-postoronnim-vkhod-zapreshen'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/kamennyi-ostrov-dobro-pozhalovat-izbrannym-ili-postoronnim-vkhod-zapreshen\">сайте</a>."
         },
         "vasil": {
             "is_group_tour": true,
@@ -76,7 +76,7 @@
             "Продолжительность": "2 часа",
             "Где закончим?": "Близ Стрелки Васильевского острова (гид сориентирует по транспорту)",
             "Сколько стоит?": "800₽ для взрослых\n500₽ для детей до 12 лет",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/excursia-dvory-Vasil'evslogo-ostrova'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/excursia-dvory-Vasil'evslogo-ostrova\">сайте</a>."
         },
         "sightseeng_gr": {
             "is_group_tour": true,
@@ -89,7 +89,7 @@
             "Продолжительность": "2 часа",
             "Где закончим?": "На набережной Зимней канавки (рядом с Эрмитажем, ближайшее метро «Адмиралтейская»)",
             "Сколько стоит?": "800₽ для взрослых\n500₽ для детей до 12 лет",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/obzornaya-ekskursiya-gulyaj-kak-peterburzhec'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/obzornaya-ekskursiya-gulyaj-kak-peterburzhec\">сайте</a>."
         },
         "blockade": {
             "is_group_tour": true,
@@ -102,7 +102,7 @@
             "Продолжительность": "2 часа",
             "Где закончим?": "У храма Спаса-на-Крови",
             "Сколько стоит?": "800₽ для взрослых\n500₽ для детей до 18 лет и пенсионеров",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/kak-oni-vyzhili-byt-blokadnogo-leningrada'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/kak-oni-vyzhili-byt-blokadnogo-leningrada\">сайте</a>."
         },
         "sightseeng_kid": {
             "is_group_tour": true,
@@ -115,7 +115,7 @@
             "Продолжительность": "1,5 часа",
             "Где закончим?": "Марсово поле или Инженерный замок в зависимости от погоды",
             "Сколько стоит?": "1300₽ для детей до 12 лет\n500₽ для взрослых",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/detskaya-excursia-po-peterburgu'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/detskaya-excursia-po-peterburgu\">сайте</a>."
         },
         "kolomna": {
             "is_group_tour": true,
@@ -128,7 +128,7 @@
             "Продолжительность": "2,5 часа",
             "Где закончим?": "У Мариинского театра",
             "Сколько стоит?": "850₽ для взрослых от 16 лет\n750₽ для пенсионеров",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/kolomna-peterburg-polusumasshedshikh'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/kolomna-peterburg-polusumasshedshikh\">сайте</a>."
         },
         "petrogr": {
             "is_group_tour": true,
@@ -141,7 +141,7 @@
             "Продолжительность": "2,5 часа",
             "Где закончим?": "У крейсера «Аврора»",
             "Сколько стоит?": "850₽ для взрослых\n500₽ для детей до 18 лет",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/iz-burga-v-burkh-i-obratno-ekskursiya-po-petrogradskoi-storone'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/iz-burga-v-burkh-i-obratno-ekskursiya-po-petrogradskoi-storone\">сайте</a>."
         },
         "fortress_priv": {
             "is_group_tour": false,
@@ -154,7 +154,7 @@
             "Продолжительность": "2,5 часа",
             "Где закончим?": "На территории Петропавловской крепости",
             "Сколько стоит?": "5400₽ за экскурсию для 1-3 чел., далее: + 1000₽ с чел.\n+400₽/250₽ ваучеры на проход в каждый музей",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/individual'naya-excursia-po-Petropavlovskoy-kreposti'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/individual'naya-excursia-po-Petropavlovskoy-kreposti\">сайте</a>."
         },
         "hermit_kid": {
             "is_group_tour": false,
@@ -167,7 +167,7 @@
             "Продолжительность": "2 часа",
             "Где закончим?": "В Эрмитаже",
             "Сколько стоит?": "6200₽ для группы 2—4 человека\nВходные билеты для себя и гида вы приобретаете самостоятельно! Мы расскажем, как это лучше сделать",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/otkryt-ermitazh-neskuchnaya-ekskursiya-dlya-detei'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/otkryt-ermitazh-neskuchnaya-ekskursiya-dlya-detei\">сайте</a>."
         },
         "rus_mus_kid": {
             "is_group_tour": false,
@@ -180,7 +180,7 @@
             "Продолжительность": "2 часа",
             "Где закончим?": "В Русском музее",
             "Сколько стоит?": "6900₽ для группы 2-4 человека\nВходные билеты для себя и гида вы приобретаете самостоятельно! Мы расскажем, как это лучше сделать",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/russkii-muzei-dlya-detei-i-vzroslykh'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/russkii-muzei-dlya-detei-i-vzroslykh\">сайте</a>."
         },
         "sightseeng_priv": {
             "is_group_tour": false,
@@ -193,7 +193,7 @@
             "Продолжительность": "3 часа",
             "Где закончим?": "Обсудим в переписке",
             "Сколько стоит?": "5400₽ за экскурсию для 1—4 чел., далее + 1300₽ с чел.",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/individual'naya-obzornaya-excursia-po-Petersburgu'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/individual'naya-obzornaya-excursia-po-Petersburgu\">сайте</a>."
         },
         "fortr_kid_q": {
             "is_group_tour": true,
@@ -206,7 +206,7 @@
             "Продолжительность": "1:10—1:30 (зависит от возраста ребенка)",
             "Где закончим?": "На территории Петропавловской крепости",
             "Сколько стоит?": "1600₽ для детей\n400₽ для взрослых",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/karta-petropavlovskoi-kreposti-kvest'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/karta-petropavlovskoi-kreposti-kvest\">сайте</a>."
         },
         "teather_kids": {
             "is_group_tour": true,
@@ -219,7 +219,7 @@
             "Продолжительность": "3,5—4,5 часа",
             "Где закончим?": "Театр эстрады им. А. Райкина на Большой конюшенной улице",
             "Сколько стоит?": "От 3900₽ за 1 ребёнка + 1 взрослого",
-            "Как забронировать?": "Вы можете забронировать тур на нашем <a href='https://peshehodtour.ru/spb/tour/ves-peterburg-teatr'>сайте</a>."
+            "Как забронировать?": "Вы можете забронировать тур на нашем <a href=\"https://peshehodtour.ru/spb/tour/ves-peterburg-teatr\">сайте</a>."
         }
     }
 }
