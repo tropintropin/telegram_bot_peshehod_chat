@@ -20,11 +20,14 @@ router: Router = Router()
 @router.message(Command(commands="invinoveritas"))
 async def process_invinoveritas_command(message: Message, state: FSMContext):
     invinoveritas_list = get_invinoveritas_list()
-    invinoveritas_keyboard = create_invinoveritas_inline_kb(1, invinoveritas_list)
+    invinoveritas_keyboard = create_invinoveritas_inline_kb(
+        1,
+        invinoveritas_list
+        )
     await message.answer(text=r'<strong>ВИННЫЕ ХРОНИКИ 🔞</strong>')
     await message.answer(
         text=LEXICON_RU['invinoveritas'],
-        reply_markup= invinoveritas_keyboard
+        reply_markup=invinoveritas_keyboard
         )
     await state.set_state(FSMInvinoveritas.lection)
 
@@ -33,10 +36,37 @@ async def process_invinoveritas_command(message: Message, state: FSMContext):
 async def process_invinoveritas_press(callback: CallbackQuery, state: FSMContext):
     if callback.message:
         invinoveritas_list = get_invinoveritas_list()
-        invinoveritas_keyboard = create_invinoveritas_inline_kb(1, invinoveritas_list)
+        invinoveritas_keyboard = create_invinoveritas_inline_kb(
+            1,
+            invinoveritas_list
+            )
         await callback.message.answer(text=r'<strong>ВИННЫЕ ХРОНИКИ 🔞</strong>')
         await callback.message.answer(
             text=LEXICON_RU['invinoveritas'],
-            reply_markup= invinoveritas_keyboard
+            reply_markup=invinoveritas_keyboard
             )
         await state.set_state(FSMInvinoveritas.lection)
+
+
+@router.callback_query(StateFilter(FSMInvinoveritas.lection))
+async def process_lection_sent(callback: CallbackQuery, state: FSMContext):
+    if callback.message:
+        lecture_info = get_invinoveritas_list()[callback.data]
+        await callback.message.answer(
+            text=f"""<strong>{lecture_info['Название']}</strong>
+
+{lecture_info["Описание"]}
+
+<strong>Лектор:</strong> {lecture_info["Лектор"]}
+
+<strong>Дата:</strong> {lecture_info["Дата"]}
+
+<strong>Место:</strong> {lecture_info["Место"]}
+
+<strong>Цены:</strong>
+{lecture_info["Цены"]}
+
+<i>{lecture_info["Забронировать"]}</i>
+""",
+            parse_mode="HTML"
+        )

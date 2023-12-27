@@ -12,12 +12,12 @@ from services.services import cut_tour_specs_for_keyboard
 
 
 def create_startup_inline_kb() -> InlineKeyboardMarkup:
-    """DOCSTRING""" #TODO
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = [
         InlineKeyboardButton(text='❓ Частые вопросы и ответы', callback_data='faq'),
         InlineKeyboardButton(text='📃 Список всех туров', callback_data='tours'),
         InlineKeyboardButton(text='🎲 Подобрать себе тур', callback_data='choose_tour'),
+        InlineKeyboardButton(text='🔞 Лекции «Винные хроники» 18+', callback_data='invinoveritas'),
         InlineKeyboardButton(text='🆘 Справка', callback_data='help'),
         InlineKeyboardButton(text='☎ Контакты', callback_data='contacts')
     ]
