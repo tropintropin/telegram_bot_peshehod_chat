@@ -16,3 +16,7 @@ class FSMTourSelection(StatesGroup):
     have_children = State()
     kids = State()
     visit = State()
+
+
+class FSMInvinoveritas(StatesGroup):
+    lection = State()

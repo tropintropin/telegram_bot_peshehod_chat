@@ -2,17 +2,41 @@
 """
 
 from aiogram import F, Router
-from aiogram.filters import Command
+from aiogram.filters import Command, StateFilter
+from aiogram.fsm.context import FSMContext
+from aiogram.fsm.state import default_state
+from aiogram.fsm.storage.redis import RedisStorage
 from aiogram.types import CallbackQuery, Message
+from redis.asyncio.client import Redis
+
+from keyboards.inline_keyboards import create_invinoveritas_inline_kb
+from lexicon.lexicon import LEXICON_RU
+from services.fsm import FSMInvinoveritas
+from services.services import get_invinoveritas_list
 
 router: Router = Router()
 
 
-@router.callback_query(F.data == "invinoveritas")
-async def process_invinoveritas_press(callback: CallbackQuery)
-    pass
-
-
 @router.message(Command(commands="invinoveritas"))
-async def process_invinoveritas_command(message: Message)
-    pass
+async def process_invinoveritas_command(message: Message, state: FSMContext):
+    invinoveritas_list = get_invinoveritas_list()
+    invinoveritas_keyboard = create_invinoveritas_inline_kb(1, invinoveritas_list)
+    await message.answer(text=r'<strong>ВИННЫЕ ХРОНИКИ 🔞</strong>')
+    await message.answer(
+        text=LEXICON_RU['invinoveritas'],
+        reply_markup= invinoveritas_keyboard
+        )
+    await state.set_state(FSMInvinoveritas.lection)
+
+
+@router.callback_query(F.data == "invinoveritas")
+async def process_invinoveritas_press(callback: CallbackQuery, state: FSMContext):
+    if callback.message:
+        invinoveritas_list = get_invinoveritas_list()
+        invinoveritas_keyboard = create_invinoveritas_inline_kb(1, invinoveritas_list)
+        await callback.message.answer(text=r'<strong>ВИННЫЕ ХРОНИКИ 🔞</strong>')
+        await callback.message.answer(
+            text=LEXICON_RU['invinoveritas'],
+            reply_markup= invinoveritas_keyboard
+            )
+        await state.set_state(FSMInvinoveritas.lection)

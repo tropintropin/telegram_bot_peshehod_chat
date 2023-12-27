@@ -154,7 +154,7 @@ def create_faq_section_item_inline_kb(width: int, user_dict: dict, section: str)
 
 
 def create_tour_selection_inline_kb(width: int, user_dict: dict) -> InlineKeyboardMarkup:
-    kb_builder: InlineKeyboardBuilder() = InlineKeyboardBuilder()
+    kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = []
 
     for callback, question in user_dict.items():
@@ -163,6 +163,22 @@ def create_tour_selection_inline_kb(width: int, user_dict: dict) -> InlineKeyboa
                 text=question,
                 callback_data=callback
             ))
+
+    kb_builder.row(*buttons, width=width)
+    kb_builder.row(create_cancel_button(), width=1)
+
+    return kb_builder.as_markup()
+
+
+def create_invinoveritas_inline_kb(width: int, user_dict: dict) -> InlineKeyboardMarkup:
+    kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
+    buttons: list[InlineKeyboardButton] = []
+
+    for date, info in user_dict.items():
+        buttons.append(InlineKeyboardButton(
+            text=info["Название"],
+            callback_data=date
+        ))
 
     kb_builder.row(*buttons, width=width)
     kb_builder.row(create_cancel_button(), width=1)

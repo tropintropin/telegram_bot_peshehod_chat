@@ -117,3 +117,10 @@ def cut_tour_specs_for_keyboard(user_dict: dict) -> dict:
     for key in ["is_group_tour", "Название", "О чём экскурсия?"]:
         specs.pop(key, None)
     return specs
+
+
+def get_invinoveritas_list() -> dict[str, dict[str, str]]:
+    invinoveritas_list_file: Path = Path("lexicon/invinoveritas.json")
+    with invinoveritas_list_file.open("r", encoding="utf-8") as f:
+        invinoveritas: dict[str, dict[str, str]] = json.load(f)["invinoveritas"]
+    return invinoveritas
