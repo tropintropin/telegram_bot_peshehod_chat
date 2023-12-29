@@ -8,7 +8,8 @@ from aiogram.filters import Command, CommandStart, StateFilter
 from aiogram.fsm.state import default_state
 from aiogram.types import CallbackQuery, Message
 
-from keyboards.inline_keyboards import create_startup_inline_kb
+from keyboards.inline_keyboards import (create_bonus_inline_kb,
+                                        create_startup_inline_kb)
 from lexicon.greeting import greeting, instruction
 from lexicon.lexicon import LEXICON_RU
 
@@ -114,4 +115,23 @@ async def process_contacts_press(callback: CallbackQuery):
         await callback.message.answer(
             text='<strong>Выберите интересующий вас раздел:</strong>',
             reply_markup=startup_keyboard
+        )
+
+
+@router.message(Command(commands='bonus'))
+async def process_bonus_command(message: Message):
+    bonus_keyboard = create_bonus_inline_kb()
+    await message.answer(
+        text=LEXICON_RU['bonus'],
+        reply_markup=bonus_keyboard
+    )
+
+
+@router.callback_query(F.data == 'bonus')
+async def process_bonus_press(callback: CallbackQuery):
+    bonus_keyboard = create_bonus_inline_kb()
+    if callback.message is not None:
+        await callback.message.answer(
+            text=LEXICON_RU['bonus'],
+            reply_markup=bonus_keyboard
         )

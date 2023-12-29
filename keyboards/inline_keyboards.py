@@ -7,7 +7,7 @@ from aiogram.utils.keyboard import InlineKeyboardBuilder
 from config_data.config import (FAQCallbackFactory, ItemsFAQCallbackFactory,
                                 ToursCallbackFactory,
                                 TourSpecItemCallbackFactory)
-from lexicon.lexicon import LEXICON_RU, LEXICON_COMMANDS
+from lexicon.lexicon import LEXICON_COMMANDS
 from services.services import cut_tour_specs_for_keyboard
 
 
@@ -30,6 +30,23 @@ def create_cancel_button() -> InlineKeyboardButton:
         text=LEXICON_COMMANDS['/cancel'],
         callback_data='cancel')
     return cancel_button
+
+
+def create_bonus_inline_kb() -> InlineKeyboardMarkup:
+    """
+    Create an inline keyboard with one button: 'Gift from Peshehod Tour'
+    and a link to the Peshehod Bonus website.
+    """
+    kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
+    buttons: list[InlineKeyboardButton] = [
+        InlineKeyboardButton(
+            text='ВАШ ПОДАРОК 🎁',
+            url='https://peshehodbonus.ru',
+            callback_data='bonus'
+        )
+    ]
+    kb_builder.row(*buttons, width=1)
+    return kb_builder.as_markup()
 
 
 def create_tours_inline_kb() -> InlineKeyboardMarkup:
