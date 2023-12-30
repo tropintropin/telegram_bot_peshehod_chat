@@ -49,6 +49,23 @@ def create_bonus_inline_kb() -> InlineKeyboardMarkup:
     return kb_builder.as_markup()
 
 
+def create_feedback_inline_kb() -> InlineKeyboardMarkup:
+    """
+    Create an inline keyboard with one button
+    and a link to the Peshehod website to sent a feedback.
+    """
+    kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
+    buttons: list[InlineKeyboardButton] = [
+        InlineKeyboardButton(
+            text='ОСТАВИТЬ ОТЗЫВ 📝',
+            url='https://peshehodtour.ru/spb/reviews',
+            callback_data='link_feedback'
+        )
+    ]
+    kb_builder.row(*buttons, width=1)
+    return kb_builder.as_markup()
+
+
 def create_tours_inline_kb() -> InlineKeyboardMarkup:
     """
     Create an inline keyboard with two buttons: 'Group Tours' and 'Private Tours'.
