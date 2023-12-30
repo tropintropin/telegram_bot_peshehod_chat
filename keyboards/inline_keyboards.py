@@ -12,6 +12,11 @@ from services.services import cut_tour_specs_for_keyboard
 
 
 def create_startup_inline_kb() -> InlineKeyboardMarkup:
+    """
+    Create an inline keyboard with the main sections of the bot.
+
+    This keyboard has appears after the '/start' and '/contacts' commands.
+    """
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = [
         InlineKeyboardButton(text='🆘 Справка', callback_data='help'),
