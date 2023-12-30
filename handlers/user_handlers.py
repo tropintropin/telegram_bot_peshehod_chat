@@ -2,6 +2,7 @@
 """
 
 from asyncio import sleep
+from typing import Any, Dict
 
 from aiogram import F, Router
 from aiogram.filters import Command, CommandStart, StateFilter
@@ -145,15 +146,15 @@ async def process_bonus_press(callback: CallbackQuery):
 
 @router.message(Command(commands='feedback'))
 async def process_feedback_command(message: Message):
-    faq_dict = get_faq_sections()
-    text = faq_dict["reviews"]["write_review"]["answer"]
+    faq_dict: Dict[str, Any]  = get_faq_sections()
+    text= faq_dict["reviews"]["write_review"]["answer"]
     feedback_keyboard = create_feedback_inline_kb()
     await message.answer(text=text, reply_markup=feedback_keyboard)
 
 
 @router.callback_query(F.data == 'feedback')
 async def process_feedback_press(callback: CallbackQuery):
-    faq_dict = get_faq_sections()
+    faq_dict: Dict[str, Any]  = get_faq_sections()
     text = faq_dict["reviews"]["write_review"]["answer"]
     feedback_keyboard = create_feedback_inline_kb()
     if callback.message is not None:
