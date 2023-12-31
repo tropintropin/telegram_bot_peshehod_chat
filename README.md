@@ -5,7 +5,7 @@
 [![version badge](https://img.shields.io/badge/aiogram-3.3.0-blue.svg)](https://docs.aiogram.dev/en/dev-3.x/)
 [![Telegram Bot API](https://img.shields.io/badge/dynamic/json?color=blue&logo=telegram&label=Telegram%20Bot%20API&query=%24.api.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Faiogram%2Faiogram%2Fdev-3.x%2F.butcher%2Fschema%2Fschema.json&style=flat-square)](https://core.telegram.org/bots/api)
 
-[![version badge](https://img.shields.io/badge/Peshehod_Help_Bot-v0.0.1b-blue.svg)](https://t.me/peshehod_help_bot)
+[![version badge](https://img.shields.io/badge/Peshehod_Help_Bot-v1.0.0-blue.svg)](https://t.me/peshehod_help_bot)
 [![copyright](https://img.shields.io/badge/©_Peshehod_Tour-2023-blue.svg)](https://peshehodtour.ru)
 [![developer](https://img.shields.io/badge/Developer-Valery_Tropin-blue.svg)](https://tropin.one)
 
