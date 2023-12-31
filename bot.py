@@ -1,34 +1,53 @@
+"""The entry point for the bot.
+"""
+
+import asyncio
+import logging
+
 from aiogram import Bot, Dispatcher
-from aiogram.types import Message
-from aiogram.filters import Text, Command
+from aiogram.enums import ParseMode
 
-from environs import Env
-
-from lexicon.greeting import greeting
-
-from time import sleep
-
-
-env: Env = Env()
-env.read_env('.env')
-
-bot: Bot = Bot(token=env('BOT_TOKEN'), parse_mode='HTML')  # NB! Change token for the prod bot!
-dp: Dispatcher = Dispatcher()
+from config_data.config import Config, load_config
+from handlers import (
+    faq_handlers,
+    other_handlers,
+    tour_selection_form_handlers,
+    tours_handlers,
+    user_handlers,
+    invinoveritas_handlers,
+)
+from keyboards.main_menu import set_main_menu
 
 
-@dp.message(Command(commands=['start']))
-async def process_start_command(message: Message):
-    # TODO: Добавить задержку между сообщениями
-    await message.answer(f'{greeting}')
+async def main() -> None:
+    file_log = logging.FileHandler("bot.log")
+    console_out = logging.StreamHandler()
+    logging.basicConfig(handlers=(file_log, console_out), level=logging.INFO)
+    logging.info("Starting bot...")
+
+    # Loads the bot configuration from a file
+    config: Config = load_config()
+
+    # Bot and dispatcher initialization
+    bot: Bot = Bot(token=config.tg_bot.token, parse_mode=ParseMode.HTML)
+    dp: Dispatcher = Dispatcher(storage=config.storage.redis_storage)
+
+    # Connecting handlers
+    dp.include_router(user_handlers.router)
+    dp.include_router(tour_selection_form_handlers.router)
+    dp.include_router(faq_handlers.router)
+    dp.include_router(tours_handlers.router)
+    dp.include_router(invinoveritas_handlers.router)
+    dp.include_router(other_handlers.router)
+
+    # Setting up the main menu
+    await set_main_menu(bot)
+
+    # Deleting outdated webhooks from the bot
+    await bot.delete_webhook(drop_pending_updates=True)
+    # Bot startup
+    await dp.start_polling(bot)
 
 
-@dp.message()       # for all other messages
-async def send_echo(message: Message):
-    await message.reply(text='''
-Для справки введите или нажмите /help
-Нажмите /start, чтобы вернуться в начало''')
-
-
-if __name__ == '__main__':
-    dp.run_polling(bot)
-
+if __name__ == "__main__":
+    asyncio.run(main())

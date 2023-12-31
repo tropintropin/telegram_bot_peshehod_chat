@@ -133,3 +133,5 @@ dmypy.json
 .vscode.idea/
 .vscode/
 .idea/
+.DS_Store
+tours.sqlite
