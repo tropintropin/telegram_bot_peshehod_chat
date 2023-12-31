@@ -1,8 +1,8 @@
 # Бот-помощник в Telegram для компании «Пешеход Тур»
 
 [![wakatime](https://wakatime.com/badge/github/tropintropin/telegram_bot_peshehod_chat.svg)](https://wakatime.com/badge/github/tropintropin/telegram_bot_peshehod_chat)
-[![version badge](https://img.shields.io/badge/Python-3.11-blue.svg)](https://www.python.org/)
-[![version badge](https://img.shields.io/badge/aiogram-3.2.0-blue.svg)](https://docs.aiogram.dev/en/dev-3.x/)
+[![version badge](https://img.shields.io/badge/Python-3.12-blue.svg)](https://www.python.org/)
+[![version badge](https://img.shields.io/badge/aiogram-3.3.0-blue.svg)](https://docs.aiogram.dev/en/dev-3.x/)
 [![Telegram Bot API](https://img.shields.io/badge/dynamic/json?color=blue&logo=telegram&label=Telegram%20Bot%20API&query=%24.api.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Faiogram%2Faiogram%2Fdev-3.x%2F.butcher%2Fschema%2Fschema.json&style=flat-square)](https://core.telegram.org/bots/api)
 
 [![version badge](https://img.shields.io/badge/Peshehod_Help_Bot-v0.0.1b-blue.svg)](https://t.me/peshehod_help_bot)
@@ -23,7 +23,7 @@
 
 ## Стек
 
-Бот написан на **Python 3.11** с использованием фреймворка **aiogram 3.2.0**.
+Бот написан на **Python 3.12** с использованием фреймворка **aiogram 3.3.0**.
 
 Информация о пользователях и данные для FSM хранятся и обрабатываются с помощью **Redis** и **SQLite**.
 
@@ -33,6 +33,8 @@
 
 Токен бота хранится в файле `.env`. В корне репозитория есть файл [`.env.example`](.env.example). Переименуйте его в `.env`
 и вставьте внутрь токен от своего бота, полученный от [`@BotFather`](https://t.me/botfather).
+
+Либо используйте секреты Docker для добавления токена бота и прочей чувсствительной информации в контейнер на проде — библиотека `environs`, которая используется в проекте, в теории, сможет извлечь переменные окружения оттуда тоже.
 
 
 ## Готовность разделов бота
