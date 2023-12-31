@@ -93,9 +93,3 @@ if connection is not None:
     execute_query(connection=connection, query=delete_tours_table_values)
     execute_query(connection=connection, query=create_tours_table)
     execute_query(connection=connection, query=create_tours)
-
-    select_tours = "SELECT * FROM tours"
-    tours = execute_read_query(connection=connection, query=select_tours)
-
-    for tour in tours:
-        print(tour)
