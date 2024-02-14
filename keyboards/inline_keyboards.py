@@ -4,9 +4,12 @@
 from aiogram.types import InlineKeyboardButton, InlineKeyboardMarkup
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 
-from config_data.config import (FAQCallbackFactory, ItemsFAQCallbackFactory,
-                                ToursCallbackFactory,
-                                TourSpecItemCallbackFactory)
+from config_data.config import (
+    FAQCallbackFactory,
+    ItemsFAQCallbackFactory,
+    ToursCallbackFactory,
+    TourSpecItemCallbackFactory,
+)
 from lexicon.lexicon import LEXICON_COMMANDS
 from services.services import cut_tour_specs_for_keyboard
 
@@ -19,13 +22,15 @@ def create_startup_inline_kb() -> InlineKeyboardMarkup:
     """
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = [
-        InlineKeyboardButton(text='🆘 Справка', callback_data='help'),
-        InlineKeyboardButton(text='❓ Частые вопросы и ответы', callback_data='faq'),
-        InlineKeyboardButton(text='🔞 Лекции «Винные хроники» 18+', callback_data='invinoveritas'),
-        InlineKeyboardButton(text='📃 Список всех туров', callback_data='tours'),
-        InlineKeyboardButton(text='🎲 Подобрать себе тур', callback_data='choose_tour'),
-        InlineKeyboardButton(text='☎ Контакты', callback_data='contacts'),
-        InlineKeyboardButton(text='📝 Оставить отзыв', callback_data='feedback')
+        InlineKeyboardButton(text="📃 Список всех туров", callback_data="tours"),
+        InlineKeyboardButton(text="❓ Частые вопросы и ответы", callback_data="faq"),
+        InlineKeyboardButton(text="🎲 Подобрать себе тур", callback_data="choose_tour"),
+        InlineKeyboardButton(
+            text="🔞 Лекции «Винные хроники» 18+", callback_data="invinoveritas"
+        ),
+        InlineKeyboardButton(text="📝 Оставить отзыв", callback_data="feedback"),
+        InlineKeyboardButton(text="🆘 Справка", callback_data="help"),
+        InlineKeyboardButton(text="☎ Контакты", callback_data="contacts"),
     ]
     kb_builder.row(*buttons, width=1)
     return kb_builder.as_markup()
@@ -33,8 +38,8 @@ def create_startup_inline_kb() -> InlineKeyboardMarkup:
 
 def create_cancel_button() -> InlineKeyboardButton:
     cancel_button: InlineKeyboardButton = InlineKeyboardButton(
-        text=LEXICON_COMMANDS['/cancel'],
-        callback_data='cancel')
+        text=LEXICON_COMMANDS["/cancel"], callback_data="cancel"
+    )
     return cancel_button
 
 
@@ -46,9 +51,7 @@ def create_bonus_inline_kb() -> InlineKeyboardMarkup:
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = [
         InlineKeyboardButton(
-            text='ВАШ ПОДАРОК 🎁',
-            url='https://peshehodbonus.ru',
-            callback_data='bonus'
+            text="ВАШ ПОДАРОК 🎁", url="https://peshehodbonus.ru", callback_data="bonus"
         )
     ]
     kb_builder.row(*buttons, width=1)
@@ -63,9 +66,9 @@ def create_stickers_inline_kb() -> InlineKeyboardMarkup:
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = [
         InlineKeyboardButton(
-            text='ДОБАВИТЬ СТИКЕРЫ 💘',
-            url='https://t.me/addstickers/valentinkipetersburg',
-            callback_data='stickers'
+            text="ДОБАВИТЬ СТИКЕРЫ 💘",
+            url="https://t.me/addstickers/valentinkipetersburg",
+            callback_data="stickers",
         )
     ]
     kb_builder.row(*buttons, width=1)
@@ -80,9 +83,9 @@ def create_feedback_inline_kb() -> InlineKeyboardMarkup:
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = [
         InlineKeyboardButton(
-            text='ОСТАВИТЬ ОТЗЫВ 📝',
-            url='https://peshehodtour.ru/spb/reviews',
-            callback_data='link_feedback'
+            text="ОСТАВИТЬ ОТЗЫВ 📝",
+            url="https://peshehodtour.ru/spb/reviews",
+            callback_data="link_feedback",
         )
     ]
     kb_builder.row(*buttons, width=1)
@@ -101,14 +104,16 @@ def create_tours_inline_kb() -> InlineKeyboardMarkup:
     """
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = [
-        InlineKeyboardButton(text='👨‍👩‍👦 Групповые', callback_data='group_tours'),
-        InlineKeyboardButton(text='💃 Индивидуальные', callback_data='private_tours')
+        InlineKeyboardButton(text="👨‍👩‍👦 Групповые", callback_data="group_tours"),
+        InlineKeyboardButton(text="💃 Индивидуальные", callback_data="private_tours"),
     ]
     kb_builder.row(*buttons, width=2)
     return kb_builder.as_markup()
 
 
-def create_tours_list_inline_kb(width: int, user_dict: dict[str, dict[str, str]]) -> InlineKeyboardMarkup:
+def create_tours_list_inline_kb(
+    width: int, user_dict: dict[str, dict[str, str]]
+) -> InlineKeyboardMarkup:
     """
     Create an inline keyboard with buttons for the list of tours.
 
@@ -126,14 +131,15 @@ def create_tours_list_inline_kb(width: int, user_dict: dict[str, dict[str, str]]
     buttons: list[InlineKeyboardButton] = []
 
     for button, name in user_dict.items():
-        buttons.append(InlineKeyboardButton(
-            text=name['Название'],
-            callback_data=ToursCallbackFactory(tours=button).pack()
-        ))
+        buttons.append(
+            InlineKeyboardButton(
+                text=name["Название"],
+                callback_data=ToursCallbackFactory(tours=button).pack(),
+            )
+        )
 
     button_tours = InlineKeyboardButton(
-        text='⬇ К списку всех туров',
-        callback_data='tours'
+        text="⬇ К списку всех туров", callback_data="tours"
     )
 
     kb_builder.row(*buttons, width=width)
@@ -142,7 +148,9 @@ def create_tours_list_inline_kb(width: int, user_dict: dict[str, dict[str, str]]
     return kb_builder.as_markup()
 
 
-def create_tour_specs_inline_kb(width: int, user_dict: dict[str, str | dict], tour) -> InlineKeyboardMarkup:
+def create_tour_specs_inline_kb(
+    width: int, user_dict: dict[str, str | dict], tour
+) -> InlineKeyboardMarkup:
     """
     Create an inline keyboard with buttons for the list of tour specifications.
 
@@ -164,14 +172,15 @@ def create_tour_specs_inline_kb(width: int, user_dict: dict[str, str | dict], to
     specs: dict = cut_tour_specs_for_keyboard(user_dict)
 
     for name in specs.keys():
-        buttons.append(InlineKeyboardButton(
-            text=name,
-            callback_data=TourSpecItemCallbackFactory(tours=tour, item=name).pack()
-        ))
+        buttons.append(
+            InlineKeyboardButton(
+                text=name,
+                callback_data=TourSpecItemCallbackFactory(tours=tour, item=name).pack(),
+            )
+        )
 
     button_tours = InlineKeyboardButton(
-        text='⬇ К списку всех туров',
-        callback_data='tours'
+        text="⬇ К списку всех туров", callback_data="tours"
     )
 
     kb_builder.row(*buttons, width=width)
@@ -180,46 +189,55 @@ def create_tour_specs_inline_kb(width: int, user_dict: dict[str, str | dict], to
     return kb_builder.as_markup()
 
 
-def create_faq_section_list_inline_kb(width: int, user_dict: dict) -> InlineKeyboardMarkup:
+def create_faq_section_list_inline_kb(
+    width: int, user_dict: dict
+) -> InlineKeyboardMarkup:
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = []
 
     for callback, section in user_dict.items():
-        buttons.append(InlineKeyboardButton(
-            text=section['section_name'],
-            callback_data=FAQCallbackFactory(section=callback).pack()
-        ))
+        buttons.append(
+            InlineKeyboardButton(
+                text=section["section_name"],
+                callback_data=FAQCallbackFactory(section=callback).pack(),
+            )
+        )
 
     kb_builder.row(*buttons, width=width)
 
     return kb_builder.as_markup()
 
 
-def create_faq_section_item_inline_kb(width: int, user_dict: dict, section: str) -> InlineKeyboardMarkup:
+def create_faq_section_item_inline_kb(
+    width: int, user_dict: dict, section: str
+) -> InlineKeyboardMarkup:
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = []
 
     for callback, item in user_dict.items():
-        buttons.append(InlineKeyboardButton(
-            text=item['question'],
-            callback_data=ItemsFAQCallbackFactory(section=section, item=callback).pack()
-        ))
+        buttons.append(
+            InlineKeyboardButton(
+                text=item["question"],
+                callback_data=ItemsFAQCallbackFactory(
+                    section=section, item=callback
+                ).pack(),
+            )
+        )
 
     kb_builder.row(*buttons, width=width)
 
     return kb_builder.as_markup()
 
 
-def create_tour_selection_inline_kb(width: int, user_dict: dict) -> InlineKeyboardMarkup:
+def create_tour_selection_inline_kb(
+    width: int, user_dict: dict
+) -> InlineKeyboardMarkup:
     kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
     buttons: list[InlineKeyboardButton] = []
 
     for callback, question in user_dict.items():
-        if callback != 'question':
-            buttons.append(InlineKeyboardButton(
-                text=question,
-                callback_data=callback
-            ))
+        if callback != "question":
+            buttons.append(InlineKeyboardButton(text=question, callback_data=callback))
 
     kb_builder.row(*buttons, width=width)
     kb_builder.row(create_cancel_button(), width=1)
@@ -232,10 +250,7 @@ def create_invinoveritas_inline_kb(width: int, user_dict: dict) -> InlineKeyboar
     buttons: list[InlineKeyboardButton] = []
 
     for date, info in user_dict.items():
-        buttons.append(InlineKeyboardButton(
-            text=info["Название"],
-            callback_data=date
-        ))
+        buttons.append(InlineKeyboardButton(text=info["Название"], callback_data=date))
 
     kb_builder.row(*buttons, width=width)
     kb_builder.row(create_cancel_button(), width=1)
