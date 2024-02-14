@@ -9,7 +9,11 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message
 
 from handlers.user_handlers import process_bonus_press
-from keyboards.inline_keyboards import create_invinoveritas_inline_kb
+from keyboards.inline_keyboards import (
+    create_stickers_inline_kb,
+    create_bonus_inline_kb,
+    create_invinoveritas_inline_kb,
+)
 from lexicon.lexicon import LEXICON_RU
 from services.fsm import FSMInvinoveritas
 from services.services import get_invinoveritas_list
@@ -20,7 +24,7 @@ router: Router = Router()
 @router.message(Command(commands="invinoveritas"))
 async def process_invinoveritas_command(message: Message, state: FSMContext):
     """
-    Processes the "invinoveritas" command. 
+    Processes the "invinoveritas" command.
     Retrieves the "invinoveritas" lectures list, creates a keyboard for selecting a lecture, and sends it along with a message to the user.
     Then sets the FSM state to "lection".
     """
@@ -34,7 +38,7 @@ async def process_invinoveritas_command(message: Message, state: FSMContext):
 @router.callback_query(F.data == "invinoveritas")
 async def process_invinoveritas_press(callback: CallbackQuery, state: FSMContext):
     """
-    Processes the "invinoveritas" button press. 
+    Processes the "invinoveritas" button press.
     Retrieves the "invinoveritas" lectures list, creates a keyboard for selecting a lecture, and sends it along with a message to the user.
     Then sets the FSM state to "lection".
     """
@@ -49,7 +53,7 @@ async def process_invinoveritas_press(callback: CallbackQuery, state: FSMContext
 @router.callback_query(StateFilter(FSMInvinoveritas.lection))
 async def process_lection_sent(callback: CallbackQuery, state: FSMContext):
     """
-    Processes the sent lecture. 
+    Processes the sent lecture.
     Extracts lecture information from the "invinoveritas" lectures list and sends it to the user.
     If lecture information is not found or if there is no message or data, logs an error.
     """
@@ -79,4 +83,13 @@ async def process_lection_sent(callback: CallbackQuery, state: FSMContext):
     else:
         logging.error(
             f"Missing message or data: message={callback.message}, data={callback.data}"
+        )
+
+        stikers_keyboard = create_stickers_inline_kb()
+        await callback.message.answer(
+            text=LEXICON_RU["stickers"], reply_markup=stikers_keyboard
+        )
+        bonus_keyboard = create_bonus_inline_kb()
+        await callback.message.answer(
+            text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard
         )

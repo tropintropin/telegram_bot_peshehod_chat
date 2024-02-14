@@ -55,6 +55,23 @@ def create_bonus_inline_kb() -> InlineKeyboardMarkup:
     return kb_builder.as_markup()
 
 
+def create_stickers_inline_kb() -> InlineKeyboardMarkup:
+    """
+    Create an inline keyboard with one button: 'Stickers from Peshehod Tour'
+    and a link to the Peshehod Stickerpack.
+    """
+    kb_builder: InlineKeyboardBuilder = InlineKeyboardBuilder()
+    buttons: list[InlineKeyboardButton] = [
+        InlineKeyboardButton(
+            text='ДОБАВИТЬ СТИКЕРЫ 💘',
+            url='https://t.me/addstickers/valentinkipetersburg',
+            callback_data='stickers'
+        )
+    ]
+    kb_builder.row(*buttons, width=1)
+    return kb_builder.as_markup()
+
+
 def create_feedback_inline_kb() -> InlineKeyboardMarkup:
     """
     Create an inline keyboard with one button

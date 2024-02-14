@@ -6,14 +6,22 @@ from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.fsm.state import default_state
 from aiogram.fsm.storage.redis import RedisStorage
-from aiogram.types import (CallbackQuery, InlineKeyboardButton,
-                            InlineKeyboardMarkup, Message)
+from aiogram.types import (
+    CallbackQuery,
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    Message,
+)
 from aiogram.utils.keyboard import InlineKeyboardBuilder
 from redis.asyncio.client import Redis
 
-from keyboards.inline_keyboards import (create_startup_inline_kb,
-                                        create_tour_selection_inline_kb,
-                                        create_tours_list_inline_kb)
+from keyboards.inline_keyboards import (
+    create_bonus_inline_kb,
+    create_stickers_inline_kb,
+    create_startup_inline_kb,
+    create_tour_selection_inline_kb,
+    create_tours_list_inline_kb,
+)
 from lexicon.lexicon import LEXICON_RU
 from services.fsm import FSMTourSelection
 from services.services import get_custom_list_of_tours, get_tour_selection
@@ -32,10 +40,20 @@ async def process_cancel_press(callback: CallbackQuery, state: FSMContext):
             text="<strong>Выберите интересующий вас раздел:</strong>",
             reply_markup=startup_keyboard,
         )
+
+        stikers_keyboard = create_stickers_inline_kb()
+        await callback.message.answer(
+            text=LEXICON_RU["stickers"], reply_markup=stikers_keyboard
+        )
+        bonus_keyboard = create_bonus_inline_kb()
+        await callback.message.answer(
+            text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard
+        )
+
         await state.clear()
 
 
-@router.message(Command(commands='choose_tour'))
+@router.message(Command(commands="choose_tour"))
 async def process_choose_tour_command(message: Message, state: FSMContext):
     """
     Handle the command "/choose_tour".
@@ -151,3 +169,8 @@ async def process_visit_sent(callback: CallbackQuery, state: FSMContext):
             text="Предлагаем вам обратить внимание на туры, которые мы подобрали специально для вас.\nВпрочем, вы всегда можете ознакомиться со всеми нашими турами по кнопке ниже.",
             reply_markup=new_tours_list_inline_kb,
         )
+
+        stikers_keyboard = create_stickers_inline_kb()
+        await callback.message.answer(text=LEXICON_RU["stickers"], reply_markup=stikers_keyboard)
+        bonus_keyboard = create_bonus_inline_kb()
+        await callback.message.answer(text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard)
