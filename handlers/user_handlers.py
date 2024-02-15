@@ -44,10 +44,7 @@ async def process_start_command(message: Message):
         reply_markup=startup_keyboard,
     )
 
-    stikers_keyboard = create_stickers_inline_kb()
-    await message.answer(text=LEXICON_RU["stickers"], reply_markup=stikers_keyboard)
-    bonus_keyboard = create_bonus_inline_kb()
-    await message.answer(text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard)
+    await process_bonus_command(message)
 
 
 @router.message(Command(commands="cancel"), StateFilter(default_state))
@@ -60,15 +57,14 @@ async def process_cancel_command(message: Message):
         reply_markup=startup_keyboard,
     )
 
-    stikers_keyboard = create_stickers_inline_kb()
-    await message.answer(text=LEXICON_RU["stickers"], reply_markup=stikers_keyboard)
-    bonus_keyboard = create_bonus_inline_kb()
-    await message.answer(text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard)
+    await process_bonus_command(message)
 
 
 @router.callback_query(F.data == "cancel", StateFilter(default_state))
 async def process_cancel_press(callback: CallbackQuery):
     if callback.message:
+        await callback.message.edit_reply_markup()
+
         await callback.message.answer(text=LEXICON_RU["/cancel"])
         await callback.message.answer(text=LEXICON_RU["/help"])
         startup_keyboard = create_startup_inline_kb()
@@ -77,14 +73,7 @@ async def process_cancel_press(callback: CallbackQuery):
             reply_markup=startup_keyboard,
         )
 
-        stikers_keyboard = create_stickers_inline_kb()
-        await callback.message.answer(
-            text=LEXICON_RU["stickers"], reply_markup=stikers_keyboard
-        )
-        bonus_keyboard = create_bonus_inline_kb()
-        await callback.message.answer(
-            text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard
-        )
+        await process_bonus_press(callback)
 
 
 @router.message(Command(commands="help"))
@@ -105,15 +94,14 @@ async def process_help_command(message: Message):
         reply_markup=startup_keyboard,
     )
 
-    stikers_keyboard = create_stickers_inline_kb()
-    await message.answer(text=LEXICON_RU["stickers"], reply_markup=stikers_keyboard)
-    bonus_keyboard = create_bonus_inline_kb()
-    await message.answer(text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard)
+    await process_bonus_command(message)
 
 
 @router.callback_query(F.data == "help")
 async def process_help_press(callback: CallbackQuery):
     if callback.message:
+        await callback.message.edit_reply_markup()
+
         await callback.message.answer(text=LEXICON_RU["/help"])
         startup_keyboard = create_startup_inline_kb()
         await callback.message.answer(
@@ -121,14 +109,7 @@ async def process_help_press(callback: CallbackQuery):
             reply_markup=startup_keyboard,
         )
 
-        stikers_keyboard = create_stickers_inline_kb()
-        await callback.message.answer(
-            text=LEXICON_RU["stickers"], reply_markup=stikers_keyboard
-        )
-        bonus_keyboard = create_bonus_inline_kb()
-        await callback.message.answer(
-            text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard
-        )
+        await process_bonus_press(callback)
 
 
 @router.message(Command(commands="contacts"))
@@ -141,17 +122,15 @@ async def process_contacts_command(message: Message):
         reply_markup=startup_keyboard,
     )
 
-    stikers_keyboard = create_stickers_inline_kb()
-    await message.answer(text=LEXICON_RU["stickers"], reply_markup=stikers_keyboard)
-    bonus_keyboard = create_bonus_inline_kb()
-    await message.answer(text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard)
+    await process_bonus_command(message)
 
 
 @router.callback_query(F.data == "contacts")
 async def process_contacts_press(callback: CallbackQuery):
     """DOCSTRING"""
     if callback.message:
-        # TODO: Change to another answer!
+        await callback.message.edit_reply_markup()
+
         await callback.message.answer(text=greeting)
         startup_keyboard = create_startup_inline_kb()
         await callback.message.answer(
@@ -159,18 +138,19 @@ async def process_contacts_press(callback: CallbackQuery):
             reply_markup=startup_keyboard,
         )
 
-        stikers_keyboard = create_stickers_inline_kb()
-        await callback.message.answer(
-            text=LEXICON_RU["stickers"], reply_markup=stikers_keyboard
-        )
-        bonus_keyboard = create_bonus_inline_kb()
-        await callback.message.answer(
-            text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard
-        )
+        await process_bonus_press(callback)
 
 
 @router.message(Command(commands="bonus"))
 async def process_bonus_command(message: Message):
+    """
+    Handle the command "/bonus".
+
+    This function creates a few messages with Peshehod bonus advertisments.
+
+    :param message: The received message object.
+    :type message: aiogram.types.Message
+    """
     bonus_keyboard = create_bonus_inline_kb()
     await message.answer(text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard)
 
@@ -180,6 +160,14 @@ async def process_bonus_command(message: Message):
 
 @router.callback_query(F.data == "bonus")
 async def process_bonus_press(callback: CallbackQuery):
+    """
+    Handle the button "bonus" press.
+
+    This function creates a few messages with Peshehod bonus advertisments.
+
+    :param callback: The received callback object.
+    :type callback: aiogram.types.CallbackQuery
+    """
     bonus_keyboard = create_bonus_inline_kb()
     if callback.message is not None:
         await callback.message.answer(
@@ -206,4 +194,6 @@ async def process_feedback_press(callback: CallbackQuery):
     text = faq_dict["reviews"]["write_review"]["answer"]
     feedback_keyboard = create_feedback_inline_kb()
     if callback.message is not None:
+        await callback.message.edit_reply_markup()
+
         await callback.message.answer(text=text, reply_markup=feedback_keyboard)

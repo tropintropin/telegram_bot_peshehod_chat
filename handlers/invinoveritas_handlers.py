@@ -10,8 +10,6 @@ from aiogram.types import CallbackQuery, Message
 
 from handlers.user_handlers import process_bonus_press
 from keyboards.inline_keyboards import (
-    create_stickers_inline_kb,
-    create_bonus_inline_kb,
     create_invinoveritas_inline_kb,
 )
 from lexicon.lexicon import LEXICON_RU
@@ -43,6 +41,8 @@ async def process_invinoveritas_press(callback: CallbackQuery, state: FSMContext
     Then sets the FSM state to "lection".
     """
     if callback.message:
+        await callback.message.edit_reply_markup()
+
         invinoveritas_list = get_invinoveritas_list()
         invinoveritas_keyboard = create_invinoveritas_inline_kb(1, invinoveritas_list)
         text = f"<strong>ВИННЫЕ ХРОНИКИ 🔞</strong>\n\n{LEXICON_RU['invinoveritas']}"
@@ -58,6 +58,8 @@ async def process_lection_sent(callback: CallbackQuery, state: FSMContext):
     If lecture information is not found or if there is no message or data, logs an error.
     """
     if callback.message is not None and callback.data is not None:
+        await callback.message.edit_reply_markup()
+
         lecture_info = get_invinoveritas_list().get(callback.data)
         if lecture_info is not None:
             text = f"""<strong>{lecture_info['Название']}</strong>
@@ -83,13 +85,4 @@ async def process_lection_sent(callback: CallbackQuery, state: FSMContext):
     else:
         logging.error(
             f"Missing message or data: message={callback.message}, data={callback.data}"
-        )
-
-        stikers_keyboard = create_stickers_inline_kb()
-        await callback.message.answer(
-            text=LEXICON_RU["stickers"], reply_markup=stikers_keyboard
-        )
-        bonus_keyboard = create_bonus_inline_kb()
-        await callback.message.answer(
-            text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard
         )
