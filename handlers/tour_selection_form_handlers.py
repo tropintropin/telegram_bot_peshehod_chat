@@ -22,6 +22,7 @@ from keyboards.inline_keyboards import (
     create_tour_selection_inline_kb,
     create_tours_list_inline_kb,
 )
+from handlers.user_handlers import process_bonus_press
 from lexicon.lexicon import LEXICON_RU
 from services.fsm import FSMTourSelection
 from services.services import get_custom_list_of_tours, get_tour_selection
@@ -33,22 +34,18 @@ router: Router = Router()
 @router.callback_query(F.data == "cancel", ~StateFilter(default_state))
 async def process_cancel_press(callback: CallbackQuery, state: FSMContext):
     if callback.message:
+        await callback.message.edit_reply_markup()
+
         await callback.message.answer(text=LEXICON_RU["/cancel"])
         await callback.message.answer(text=LEXICON_RU["/help"])
+        
         startup_keyboard = create_startup_inline_kb()
         await callback.message.answer(
             text="<strong>Выберите интересующий вас раздел:</strong>",
             reply_markup=startup_keyboard,
         )
 
-        stikers_keyboard = create_stickers_inline_kb()
-        await callback.message.answer(
-            text=LEXICON_RU["stickers"], reply_markup=stikers_keyboard
-        )
-        bonus_keyboard = create_bonus_inline_kb()
-        await callback.message.answer(
-            text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard
-        )
+        await process_bonus_press(callback)
 
         await state.clear()
 
@@ -71,6 +68,8 @@ async def process_choose_tour_command(message: Message, state: FSMContext):
 @router.callback_query(F.data == "choose_tour")
 async def process_choose_tour_press(callback: CallbackQuery, state: FSMContext):
     if callback.message:
+        await callback.message.edit_reply_markup()
+
         questions = get_tour_selection()
         is_group_keyboard = create_tour_selection_inline_kb(
             width=2, user_dict=questions["is_group"]
@@ -84,6 +83,8 @@ async def process_choose_tour_press(callback: CallbackQuery, state: FSMContext):
 @router.callback_query(StateFilter(FSMTourSelection.is_group))
 async def process_is_group_sent(callback: CallbackQuery, state: FSMContext):
     if callback.message:
+        await callback.message.edit_reply_markup()
+
         await state.update_data(is_group=callback.data)
         questions = get_tour_selection()
         is_group_keyboard = create_tour_selection_inline_kb(
@@ -98,6 +99,8 @@ async def process_is_group_sent(callback: CallbackQuery, state: FSMContext):
 @router.callback_query(StateFilter(FSMTourSelection.have_children), F.data == "kids")
 async def process_have_children_sent(callback: CallbackQuery, state: FSMContext):
     if callback.message:
+        await callback.message.edit_reply_markup()
+
         await state.update_data(have_children=callback.data)
 
         questions = get_tour_selection()
@@ -113,6 +116,8 @@ async def process_have_children_sent(callback: CallbackQuery, state: FSMContext)
 @router.callback_query(StateFilter(FSMTourSelection.have_children), F.data == "adults")
 async def process_not_have_children_sent(callback: CallbackQuery, state: FSMContext):
     if callback.message:
+        await callback.message.edit_reply_markup()
+
         await state.update_data(have_children=callback.data)
         await state.update_data(kids=None)
 
@@ -129,6 +134,8 @@ async def process_not_have_children_sent(callback: CallbackQuery, state: FSMCont
 @router.callback_query(StateFilter(FSMTourSelection.kids))
 async def process_kids_sent(callback: CallbackQuery, state: FSMContext):
     if callback.message:
+        await callback.message.edit_reply_markup()
+
         await state.update_data(kids=callback.data)
 
         questions = get_tour_selection()
@@ -144,6 +151,8 @@ async def process_kids_sent(callback: CallbackQuery, state: FSMContext):
 @router.callback_query(StateFilter(FSMTourSelection.visit))
 async def process_visit_sent(callback: CallbackQuery, state: FSMContext):
     if callback.message:
+        await callback.message.edit_reply_markup()
+
         await state.update_data(visit=callback.data)
 
         user_answers = {}
@@ -170,7 +179,4 @@ async def process_visit_sent(callback: CallbackQuery, state: FSMContext):
             reply_markup=new_tours_list_inline_kb,
         )
 
-        stikers_keyboard = create_stickers_inline_kb()
-        await callback.message.answer(text=LEXICON_RU["stickers"], reply_markup=stikers_keyboard)
-        bonus_keyboard = create_bonus_inline_kb()
-        await callback.message.answer(text=LEXICON_RU["bonus"], reply_markup=bonus_keyboard)
+        await process_bonus_press(callback)
