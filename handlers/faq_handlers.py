@@ -23,8 +23,7 @@ async def process_faq_specs_item_press(
 ):
     if callback_data.item == "tours":  # Move to Tours Section if true
         if callback.message:
-            await callback.message.edit_reply_markup()
-        await process_tours_press(callback)
+            await process_tours_press(callback)
     else:
         if callback.message:
             await callback.message.edit_reply_markup()
