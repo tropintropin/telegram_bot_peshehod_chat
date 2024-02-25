@@ -6,7 +6,7 @@
 	check-redis check-sqlite
 
 # Setup variables
-SERVICE_PATH := $$(pwd)/telegram-bot-peshehod.service
+SERVICE_PATH := $$(pwd)/setup/telegram-bot-peshehod.service
 
 # Check python3 and pip3
 PYTHON3_OK := $(shell command -v python3)
@@ -55,10 +55,15 @@ install-sqlite:
 
 # Telegram bot setup
 install-venv:
-	python3 -m venv venv
+	@if [ ! -d "venv" ]; then \
+		echo "Creating virtual environment..."; \
+		python3 -m venv venv; \
+	else \
+		echo "Virtual environment already exists."; \
+	fi
 
 install-requirements:
-	source venv/bin/activate && pip3 install -r requirements.txt
+	. venv/bin/activate && pip3 install -r requirements.txt
 
 create-symlink:
 	sudo ln -sf $(SERVICE_PATH) /etc/systemd/system/telegram-bot-peshehod.service
