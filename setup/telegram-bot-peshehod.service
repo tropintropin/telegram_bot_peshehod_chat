@@ -7,7 +7,7 @@ Requires=redis.service
 [Service]
 Type=simple
 
-User=peshehod
+User=
 
 WorkingDirectory=/home/dev/telegram_bot_peshehod_chat
 ExecStart=/bin/bash -c 'source venv/bin/activate && python bot.py'

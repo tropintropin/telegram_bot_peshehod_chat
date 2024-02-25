@@ -1,5 +1,4 @@
 .PHONY: all \
-	check-user \
 	install-redis run-redis \
 	install-sqlite \
 	install-venv install-requirements \
@@ -22,19 +21,9 @@ ifeq ('$(PIP3_OK)','')
 	$(error pip3 is not installed. Please install pip3.)
 endif
 
-all: check-user install-redis run-redis install-sqlite \
+all: install-redis run-redis install-sqlite \
 	install-venv install-requirements \
 	create-symlink reload-systemd enable-service start-service check-service
-
-# Check user peshehod
-check-user:
-	@if ! id -u peshehod > /dev/null 2>&1; then \
-		echo "User peshehod does not exist. Creating..."; \
-		sudo useradd -r -s /usr/sbin/nologin peshehod; \
-		chmod 775 $(APP_PATH); \
-	else \
-		echo "User peshehod already exists."; \
-	fi
 
 # Check and install Redis
 check-redis:
@@ -79,6 +68,10 @@ install-requirements:
 
 create-symlink:
 	sudo ln -sf $(SERVICE_PATH) /etc/systemd/system/telegram-bot-peshehod.service
+	@echo "Setting service to run as current user..."
+	@sudo sed -i 's/^User=.*$$/User=$(shell whoami)/' /etc/systemd/system/telegram-bot-peshehod.service
+	@echo "Service updated."
+
 
 reload-systemd:
 	sudo systemctl daemon-reload
