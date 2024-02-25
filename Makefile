@@ -7,6 +7,7 @@
 	check-redis check-sqlite
 
 # Setup variables
+APP_PATH := $$(pwd)
 SERVICE_PATH := $$(pwd)/setup/telegram-bot-peshehod.service
 
 # Check python3 and pip3
@@ -30,6 +31,7 @@ check-user:
 	@if ! id -u peshehod > /dev/null 2>&1; then \
 		echo "User peshehod does not exist. Creating..."; \
 		sudo useradd -r -s /usr/sbin/nologin peshehod; \
+		chmod 775 $(APP_PATH); \
 	else \
 		echo "User peshehod already exists."; \
 	fi
