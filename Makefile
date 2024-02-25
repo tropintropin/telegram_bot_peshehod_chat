@@ -27,7 +27,7 @@ all: check-user install-redis run-redis install-sqlite \
 
 # Check user peshehod
 check-user:
-    @if ! id -u peshehod > /dev/null   2>&1; then \
+	@if ! id -u peshehod > /dev/null 2>&1; then \
         echo "User peshehod does not exist. Creating..."; \
 		sudo useradd -r -s /usr/sbin/nologin peshehod; \
     else \
