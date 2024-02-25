@@ -14,11 +14,11 @@ PYTHON3_OK := $(shell command -v python3)
 PIP3_OK := $(shell command -v pip3)
 
 ifeq ('$(PYTHON3_OK)','')
-    $(error Python 3 is not installed. Please install Python 3.)
+	$(error Python 3 is not installed. Please install Python 3.)
 endif
 
 ifeq ('$(PIP3_OK)','')
-    $(error pip3 is not installed. Please install pip3.)
+	$(error pip3 is not installed. Please install pip3.)
 endif
 
 all: check-user install-redis run-redis install-sqlite \
@@ -28,11 +28,11 @@ all: check-user install-redis run-redis install-sqlite \
 # Check user peshehod
 check-user:
 	@if ! id -u peshehod > /dev/null 2>&1; then \
-        echo "User peshehod does not exist. Creating..."; \
+		echo "User peshehod does not exist. Creating..."; \
 		sudo useradd -r -s /usr/sbin/nologin peshehod; \
-    else \
-        echo "User peshehod already exists."; \
-    fi
+	else \
+		echo "User peshehod already exists."; \
+	fi
 
 # Check and install Redis
 check-redis:
@@ -89,5 +89,5 @@ start-service:
 
 check-service:
 	sudo systemctl --no-pager status telegram-bot-peshehod.service
-    echo "Checking if service is active..."
-    sudo systemctl --no-pager is-active telegram-bot-peshehod.service
+	echo "Checking if service is active..."
+	sudo systemctl --no-pager is-active telegram-bot-peshehod.service
