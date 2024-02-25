@@ -70,9 +70,9 @@ create-symlink:
 	sudo ln -sf $(SERVICE_PATH) /etc/systemd/system/telegram-bot-peshehod.service
 	@echo "Setting service to run as current user..."
 	@sudo sed -i 's/^User=.*$$/User=$(shell whoami)/' /etc/systemd/system/telegram-bot-peshehod.service
-	@sudo sed -i 's/^User=.*$$/WorkingDirectory=$(SERVICE_PATH)/' /etc/systemd/system/telegram-bot-peshehod.service
+	@echo "Setting service WorkingDirectory..."
+	@sudo sed -i 's|^WorkingDirectory=.*|WorkingDirectory=$(dir $(SERVICE_PATH))|' /etc/systemd/system/telegram-bot-peshehod.service
 	@echo "Service updated."
-
 
 reload-systemd:
 	sudo systemctl daemon-reload
