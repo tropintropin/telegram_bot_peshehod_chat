@@ -34,7 +34,7 @@ check-redis:
 	fi
 
 install-redis:
-	sudo apt update
+	@sudo apt update
 	sudo apt install -y redis-server
 
 run-redis:
@@ -50,7 +50,7 @@ check-sqlite:
 	fi
 
 install-sqlite:
-	sudo apt update
+	@sudo apt update
 	sudo apt install -y sqlite3
 	sqlite3 --version
 
