@@ -5,7 +5,7 @@
 [![version badge](https://img.shields.io/badge/aiogram-3.3.0-blue.svg)](https://docs.aiogram.dev/en/dev-3.x/)
 [![Telegram Bot API](https://img.shields.io/badge/dynamic/json?color=blue&logo=telegram&label=Telegram%20Bot%20API&query=%24.api.version&url=https%3A%2F%2Fraw.githubusercontent.com%2Faiogram%2Faiogram%2Fdev-3.x%2F.butcher%2Fschema%2Fschema.json&style=flat-square)](https://core.telegram.org/bots/api)
 
-[![version badge](https://img.shields.io/badge/Peshehod_Help_Bot-v1.0.0-blue.svg)](https://t.me/peshehod_help_bot)
+[![version badge](https://img.shields.io/badge/Peshehod_Help_Bot-v1.0.2-blue.svg)](https://t.me/peshehod_help_bot)
 [![copyright](https://img.shields.io/badge/©_Peshehod_Tour-2023-blue.svg)](https://peshehodtour.ru)
 [![developer](https://img.shields.io/badge/Developer-Valery_Tropin-blue.svg)](https://tropin.one)
 
@@ -15,10 +15,13 @@
 
 <!-- vim-markdown-toc GFM -->
 
-* [Стек](#Стек)
-* [Готовность разделов](#Готовность-разделов)
-* [График работы](#График-работы)
-* [Перспективная схема разделов бота](#Перспективная-схема-разделов-бота)
+* [Стек](#стек)
+* [`.env`](#env)
+* [`Makefile`](#makefile)
+* [Шпаргалка по systemd](#шпаргалка-по-systemd)
+* [Готовность разделов](#готовность-разделов)
+* [График работы](#график-работы)
+* [Перспективная схема разделов бота](#перспективная-схема-разделов-бота)
 
 <!-- vim-markdown-toc -->
 
@@ -28,10 +31,10 @@
 
 Данные для FSM хранятся и обрабатываются с помощью **Redis** и **SQLite**.
 
-> Необходимо отдельно установить Redis и SQLite в систему, запустить сервер Redis в фоновом режиме, чтобы бот заработал.
+> Redis и SQLite можно установить вручную, а можно через `Makefile`. Но Python лучше ставить вручную.
 
 <details>
-<summary><i>Подробнее про установку Redis и SQLite на Ubuntu и другие ОС</i></summary>
+<summary><i>Подробнее про установку Redis и SQLite на Ubuntu в ручном режиме</i></summary>
 
 Установка [Redis](https://timeweb.cloud/tutorials/redis/ustanovka-i-nastrojka-redis-dlya-raznyh-os)
 <br>
@@ -52,10 +55,28 @@
 
 Документация для модулей, классов, функций и методов, аннотации типов написаны при неоценимой поддержке [GPT-3.5](https://chat.openai.com) и [Phind Model](https://www.phind.com).
 
+### `.env`
+
 Токен бота хранится в файле `.env`. В корне репозитория есть файл [`.env.example`](.env.example). Переименуйте его в `.env`
 и вставьте внутрь токен от своего бота, полученный от [`@BotFather`](https://t.me/botfather).
 
 > Либо используйте секреты Docker для добавления токена бота и прочей чувствительной информации в контейнер на проде — библиотека `environs`, которая используется в проекте, в теории, сможет извлечь переменные окружения оттуда тоже.
+
+### `Makefile`
+
+В корне проекта есть [`Makefile`](Makefile). После того, как заполните токен бота, запустите из директории проекта `make`: команда проверит, установлены ли Python и pip, при необходимости установит Redis и SQLite, создаст симлинк с юнитом для systemd из файла [`telegram-bot-peshehod.service`](setup/telegram-bot-peshehod.service), подставив в него имя текущего пользователя системы и запустит юнита как службу.
+
+### Шпаргалка по systemd:
+
+- перезагружаем демона: `sudo systemctl daemon-reload`
+- активируем службу: `sudo systemctl enable telegram-bot-peshehod.service`
+- запускаем службу: `sudo systemctl start telegram-bot-peshehod.service`
+- проверяем статус службы: `sudo systemctl status telegram-bot-peshehod.service`
+- останавливаем службу: `sudo systemctl stop telegram-bot-peshehod.service`
+- отключаем службу от автозапуска: `sudo systemctl disable telegram-bot-peshehod.service`
+- удаляем файл службы: `sudo rm /etc/systemd/system/telegram-bot-peshehod.service`
+- перезагружаем демона: `sudo systemctl daemon-reload`
+- сбрасываем статус ошибки для службы, если он был установлен: `sudo systemctl reset-failed`
 
 ## Готовность разделов
 
