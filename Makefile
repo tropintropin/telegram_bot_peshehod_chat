@@ -1,4 +1,5 @@
 .PHONY: all \
+	check-user \
 	install-redis run-redis \
 	install-sqlite \
 	install-venv install-requirements \
@@ -20,13 +21,22 @@ ifeq ('$(PIP3_OK)','')
     $(error pip3 is not installed. Please install pip3.)
 endif
 
-all: install-redis run-redis install-sqlite \
+all: check-user install-redis run-redis install-sqlite \
 	install-venv install-requirements \
 	create-symlink reload-systemd enable-service start-service check-service
 
+# Check user peshehod
+check-user:
+    @if ! id -u peshehod > /dev/null   2>&1; then \
+        echo "User peshehod does not exist. Creating..."; \
+		sudo useradd -r -s /usr/sbin/nologin peshehod; \
+    else \
+        echo "User peshehod already exists."; \
+    fi
+
 # Check and install Redis
 check-redis:
-	@if ! command -v redis-server; then \
+	@if ! command -v redis-server > /dev/null 2>&1; then \
 		make install-redis; \
 	else \
 		echo "Redis is already installed."; \
@@ -42,7 +52,7 @@ run-redis:
 
 # Check and install SQLite
 check-sqlite:
-	@if ! command -v sqlite3; then \
+	@if ! command -v sqlite3 > /dev/null 2>&1; then \
 		make install-sqlite; \
 	else \
 		echo "SQLite is already installed."; \
@@ -78,5 +88,6 @@ start-service:
 	sudo systemctl start telegram-bot-peshehod.service
 
 check-service:
-	sudo systemctl status telegram-bot-peshehod.service
-	sudo systemctl is-active telegram-bot-peshehod.service
+	sudo systemctl --no-pager status telegram-bot-peshehod.service
+    echo "Checking if service is active..."
+    sudo systemctl --no-pager is-active telegram-bot-peshehod.service
