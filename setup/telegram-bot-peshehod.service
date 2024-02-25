@@ -9,7 +9,7 @@ Type=simple
 
 User=
 
-WorkingDirectory=/home/dev/telegram_bot_peshehod_chat
+WorkingDirectory=
 ExecStart=/bin/bash -c 'source venv/bin/activate && python bot.py'
 
 Restart=always
