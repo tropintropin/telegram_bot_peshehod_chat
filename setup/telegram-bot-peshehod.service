@@ -1,0 +1,18 @@
+[Unit]
+Description=TelegramBotPeshehod
+After=network.target
+After=redis.service
+Requires=redis.service
+
+[Service]
+Type=simple
+
+User=
+
+WorkingDirectory=/home/dev/telegram_bot_peshehod_chat
+ExecStart=/bin/bash -c 'source venv/bin/activate && python bot.py'
+
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
