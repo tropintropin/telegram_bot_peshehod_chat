@@ -6,7 +6,6 @@
 	check-redis check-sqlite
 
 # Setup variables
-APP_PATH := $$(pwd)
 SERVICE_PATH := $$(pwd)/setup/telegram-bot-peshehod.service
 
 # Check python3 and pip3
@@ -71,7 +70,7 @@ create-symlink:
 	@echo "Setting service to run as current user..."
 	@sudo sed -i 's/^User=.*$$/User=$(shell whoami)/' /etc/systemd/system/telegram-bot-peshehod.service
 	@echo "Setting service WorkingDirectory..."
-	@sudo sed -i 's|^WorkingDirectory=.*|WorkingDirectory=$$(dirname $(SERVICE_PATH))/|' /etc/systemd/system/telegram-bot-peshehod.service
+	@sudo sed -i 's|^WorkingDirectory=.*|WorkingDirectory=$(shell pwd)/|' /etc/systemd/system/telegram-bot-peshehod.service
 	@echo "Service updated."
 
 reload-systemd:
